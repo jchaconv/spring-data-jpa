@@ -1,0 +1,58 @@
+
+
+start: 09/12/2025
+
+*******************************************
+Section 2: Introduction to Spring Data JPA
+*******************************************
+
+JDBC: Java Database Connectivity
+    - API, again, is an interface.
+    - Uses drivers to the low level communication to databases
+
+JPA: Is the Java Persistence API, JPA is just the interface.
+    - don't use it for batch operations with 10's of thousands of records
+
+* JPA vs JDBC  (Which is better?)
+
+Hibernate: Is an implementation of JPA. ORM.
+
+Spring Data JPA:
+    - Is an abstraction which implements the "Repository Pattern", provide interface for CRUD
+    - You provide the interface and SDJ the implementation
+
+-----------------------------
+
+Create a project: sdjpa-intro, java 17
+dependencies: web, jpa and h2
+
+jakarta.persistence
+
+@Entity  --> needs an Id
+@Id --> Generated AUTO
+
+-----------------------------
+
+Equality in Hibernate
+
+use equals and hashcode methods with only id
+if the id's are equal, then is the same object
+
+-----------------------------
+
+Repository
+
+look this interfaces:
+ - PagingAndSortingRepository
+ - CrudRepository
+ - JpaRepository
+
+ ---------------------------
+
+Very useful for troubleshooting.
+#Investigate what is the correct key of this property.
+logging.level.org.hibernate.orm.jdbc.bind=TRACE
+
+----------------------------
+
+h2 console, just with the basic property I can access with default values in the console.
