@@ -217,9 +217,21 @@ Schema Initialization with Hibernate
 - To initialize tables from schema.sql file using hibernate.
 - configurations and tests SpringBootJpaTestSplice ok
 
+----------------------------------------------
 
+Schema Initialization with MySQL
 
+- With this property(local) schema.sql always going to run:
+spring.sql.init.mode=always
 
+- Mysql integration test ok
+
+----------------------------------------------
+
+Use H2 for Spring Boot Application
+- disable local profile for run application
+- modify pom and active profile from the right menu "profiles"
+- starting application ok
 
 
 
