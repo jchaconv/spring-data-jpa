@@ -56,3 +56,68 @@ logging.level.org.hibernate.orm.jdbc.bind=TRACE
 ----------------------------
 
 h2 console, just with the basic property I can access with default values in the console.
+
+*********************************
+Section 3: Introduction to MySQL
+*********************************
+
+branch: section3-intro-to-mysql
+
+A Database is a set of related data and how it is organized
+DBMS: Database Management Systems
+
+Transactions & ACID (easy with one user, becomes very complex with many transacting users)
+
+- Atomicity: All statements must be able to complete
+- Consistency: Changes do not violate constraints
+- Isolation: Reads inside the transaction see changed data.
+             Reads outside transaction see original data (until commit).
+- Durability: Once committed, changes are permanent.
+
+There are some techniques to prevent Lost Updates:
+
+- Pessimistic Locking: uses a database lock to prevent inflight transactions and will allow transactions to complete
+- Optimistic Locking
+
+DDL: Data definition language
+DML: Data manipulation language
+
+
+Administration best practices
+- Use a schema for your application
+- don't use a "superuser" acc for your application user
+- apply the principle of minimal authorities
+- Account used by application often called a "service account"
+- Service account should only have CRUD access
+- Service account should not be able to perform DDL operations
+    - Prevents malicious acts via SQL Injections attacks
+
+- review docs about data types in mysql and hibernate
+
+----------------------------------
+
+Create Schema and User for Spring Boot
+
+database to create bookdb
+users to create: bookadmin and bookuser (application service account)
+
+docker run -p 3306:3306 --name springdatajpa -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bookdb -d mysql
+
+Run this script:
+
+DROP DATABASE IF EXISTS bookdb;
+DROP USER IF EXISTS `bookadmin`@`%`;
+DROP USER IF EXISTS `bookuser`@`%`;
+
+CREATE DATABASE IF NOT EXISTS bookdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS `bookadmin`@`%` IDENTIFIED BY 'password';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, INDEX, ALTER, EXECUTE, CREATE VIEW, SHOW VIEW,
+CREATE ROUTINE, ALTER ROUTINE, EVENT, TRIGGER ON `bookdb`.* TO `bookadmin`@`%`;
+
+CREATE USER IF NOT EXISTS `bookuser`@`%` IDENTIFIED BY 'password';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `bookdb`.* TO `bookuser`@`%`;
+
+FLUSH PRIVILEGES;
