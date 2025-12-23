@@ -298,3 +298,54 @@ Spring boot configuration - Flyway
 - doesn't work, maybe it needs more configuration
 - FlywayMigrationStrategy clean migrate configs and clean env properties to delete the created schema with flyway.
 
+
+**********************************
+Section 8: Hibernate Primary Keys
+**********************************
+
+branch: section8-hibernate-primary-keys
+
+
+Numeric Primary Keys:
+
+GenerationType.AUTO → Let Hibernate picks, best practice is to specify
+GenerationType.SEQUENCE → Use a database sequence, most used in Oracle environment, not a mysql feature.
+GenerationType.IDENTITY → Use auto incremented database columns
+GenerationType.TABLE → Use database table to simulate sequence
+
+UUID Primary Keys:
+Universal unique identifier
+Natural, Composite keys
+
+Small table (few million rows) Integer or Long
+Larget table (millions or billions) UUID (if disk space allows)
+
+----------------------------------------
+
+Auto increment primary key
+- change to IDENTITY the id's of Book and Author
+- add auto_increment in the id definition in schema.sql file
+- I just noticed that use the id as auto_increment in database is a better option that sequence tables
+- So, I commented all queries about sequence tables
+- I see the table created with auto_increment id specification
+
+----------------------------------------
+
+UUID Primary Key
+- add author_uuid script to schema.sql
+- create AuthorUuid class, there are some new annotations such as @JdbcTypeCode
+  to indicate the value is a string and @Column to specify more details of the column
+- create AuthorUuidRepository
+- add some logic to DataInitializer
+- test ok, I see the logs and the new table on mysql db
+
+----------------------------------------
+
+UUID RFC 4122 Primary Key
+- create book_uuid in schema.sql
+- Add repository and logic in DataInitializer
+- SELECT * FROM book_uuid; ---> shows a binary id
+- select hex(id) from book_uuid; ---> shows this value hexa 9960DF5679ED494A883EF723338126FA
+- is the same value printed in console (saved book uuid)
+
+----------------------------------------
