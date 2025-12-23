@@ -230,12 +230,29 @@ spring.sql.init.mode=always
 
 Use H2 for Spring Boot Application
 - disable local profile for run application
-- modify pom and active profile from the right menu "profiles"
+- modify pom and active profile h2 from the right menu "profiles"
 - starting application ok
 
 
+******************************************
+Section 6 - 7: Using Liquibase and Flyway
+******************************************
 
+branch: section6-7-liquibase-flyway
 
+Liquibase is a migration tool
+Flyway support SQL and Java only
 
+Terminology:
+- ChangeSet
+- Change
+- Changelog
+- Preconditions
+- Context
+- ChangeLog Parameters
+
+- add plugin from liquibase site  docs.liquibase.com/tools-integrations/maven/home.html
+- add pom dependency, search liquibase maven, choose the latest
+- just seeing these sections, because maven cannot download the dependency
 
 
