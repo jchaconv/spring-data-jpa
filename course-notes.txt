@@ -200,11 +200,22 @@ Integration Test for MySQL
     - @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
     - The previous line is to tell spring boot don't do your autoconfiguration of the data source here.
 
+----------------------------------------------
 
+H2 MySQL Compatibility Mode
 
+Is there a way to allow H2 accepts MySQL script? This is for run production tests in H2
+without modifying the prod scripts to be compatible with H2
 
+- add properties to the default configuration
+- add @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) in JpaTestSplice
 
+----------------------------------------------
 
+Schema Initialization with Hibernate
+
+- To initialize tables from schema.sql file using hibernate.
+- configurations and tests SpringBootJpaTestSplice ok
 
 
 
