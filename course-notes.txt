@@ -154,5 +154,65 @@ add this to the firm of the test class:
 @ComponentScan(basePackages = {"com.vilelo.sdjpa_intro.bootstrap"})
 With this change the DataInitiliazer class is added to the context of the SpringDataJpa test
 
+********************************
+Section 5: Hibernate with MySQL
+********************************
+
+branch: section5-hibernate-with-mysql
+
+Hibernate DDL Schema Generation Tool
+
+- aka hbm2ddl.auto configuration property
+- Hibernate has the ability to reflect on JPA annotated classes to determine necessary database structure
+- Hibernate can create and execute DDL statements
+- Spring boot is autoconfiguring this property to automatically generate database tables.
+
+HBM DDL Auto Properties
+- none
+- create-only
+- drop
+- create
+- create-drop
+- validate
+- update
+
+- camel case to snake case: productDescription -> PRODUCT_DESCRIPTION
+- not recommended for production databases. In prod use validate or none
+
+---------------------------------------------
+
+MySQL Spring Boot Configuration
+
+- add pom dependency
+- create local properties
+- edit run configurations with local profile
+- start the application and see no errors --- the table is created automatically with two rows (DataInitializer class)
+- SELECT * FROM bookdb.book;
+
+----------------------------------------------
+
+Integration Test for MySQL
+
+- In DataInitializer class add this:
+    - @Profile({"local", "default"})
+    - bookRepository.deleteAll();  --- remember this kind of configurations only for local databases
+- Create MySQLIntegrationTest
+    - @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+    - The previous line is to tell spring boot don't do your autoconfiguration of the data source here.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

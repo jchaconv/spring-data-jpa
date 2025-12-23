@@ -13,8 +13,8 @@ import org.springframework.test.annotation.Commit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@ComponentScan(basePackages = {"com.vilelo.sdjpa_intro.bootstrap"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ComponentScan(basePackages = {"com.vilelo.sdjpa_intro.bootstrap"})
 @DataJpaTest
 public class SpringBootJpaTestSplice {
 
