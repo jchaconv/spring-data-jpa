@@ -148,7 +148,11 @@ Test Transactions
 
 --------------------------
 
+Bootstrapping Data
 
+add this to the firm of the test class:
+@ComponentScan(basePackages = {"com.vilelo.sdjpa_intro.bootstrap"})
+With this change the DataInitiliazer class is added to the context of the SpringDataJpa test
 
 
 
