@@ -289,27 +289,12 @@ repair
 * I fix the tests problem adding the appropriate query on schema.sql
 When you start the application (local env) you can see the mysql tables created correctly.
 
+-----------------------------
 
-**********************************
-Section 8: Hibernate Primary Keys
-**********************************
+Spring boot configuration - Flyway
+- add dependency
+- change local properties
+- Change the schema.sql path and rename → db.migration.V1__init_database.sql
+- doesn't work, maybe it needs more configuration
+- FlywayMigrationStrategy clean migrate configs and clean env properties to delete the created schema with flyway.
 
-branch: section8-hibernate-primary-keys
-
-
-Numeric Primary Keys:
-
-GenerationType.AUTO → Let Hibernate Pick, best practice is to specify
-GenerationType.SEQUENCE → Use a database sequence, most used in Oracle environment, not a mysql feature.
-GenerationType.IDENTITY → Use auto incremented database columns
-GenerationType.TABLE → Use database table to simulate sequence
-
-UUID Primary Keys:
-Universal unique identifier
-Natural, Composite keys
-
-Small table (few million rows) Integer or Long
-Larget table (millions or billions) UUID (if disk space allows)
-
-alter table book change id id BINGINT auto_increment;
-alter table author change id id BINGINT auto_increment;
