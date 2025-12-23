@@ -121,3 +121,34 @@ CREATE USER IF NOT EXISTS `bookuser`@`%` IDENTIFIED BY 'password';
 GRANT SELECT, INSERT, UPDATE, DELETE, SHOW VIEW ON `bookdb`.* TO `bookuser`@`%`;
 
 FLUSH PRIVILEGES;
+
+
+****************************************************
+Section 4: Introduction to Testing with Spring Boot
+****************************************************
+
+branch: section4-intro-to-testing
+
+@DataJpaTest   ---> SpringBootJpaTestSplice
+ - With this annotation the DataInitializer class has no impact, and it's ok
+ - This annotation brings up a minimal context for testing the spring data repository
+ - Auto database configuration occurs for us
+ - You get the complete database brought up
+ - All your entity classes and repositories are detected
+
+--------------------------
+
+Test Transactions
+- Each test is a database transaction and the default behavior is rollback for that
+- The following annotations are useful to test a sequence of transactions
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Order ---> in each test method
+@Commit ---> cleaner than @Rollback=false ... generally you don't want to use this because it affects the real data
+
+--------------------------
+
+
+
+
+
