@@ -7,6 +7,8 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
@@ -17,6 +19,20 @@ class AuthorDaoIntegrationTest {
 
     @Autowired
     AuthorDao authorDao;
+
+    @Test
+    void findAllTest() {
+        List<Author> authors = authorDao.findAll();
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void listAuthorsByLastNameLikeTest() {
+        List<Author> authors = authorDao.listAuthorByLastNameLike("Wall");
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
 
     @Test
     void getAuthorByIdTest() {

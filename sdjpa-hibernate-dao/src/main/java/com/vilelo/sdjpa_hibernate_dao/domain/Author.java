@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+@NamedQuery(name = "author_find_all", query = "FROM Author")
 @Entity
 public class Author {
 

@@ -3,8 +3,11 @@ package com.vilelo.sdjpa_hibernate_dao.dao;
 import com.vilelo.sdjpa_hibernate_dao.domain.Author;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class AuthorDaoImpl implements AuthorDao {
@@ -13,6 +16,29 @@ public class AuthorDaoImpl implements AuthorDao {
 
     public AuthorDaoImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
+    }
+
+    @Override
+    public List<Author> findAll() {
+        EntityManager entityManager = getEntityManager();
+        try {
+            TypedQuery<Author> typedQuery = entityManager.createNamedQuery("author_find_all", Author.class);
+            return typedQuery.getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public List<Author> listAuthorByLastNameLike(String lastName) {
+        EntityManager entityManager = getEntityManager();
+        try {
+            Query query = entityManager.createQuery("SELECT a FROM Author a WHERE a.lastName like :last_name");
+            query.setParameter("last_name", lastName + "%");
+            return query.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     @Override

@@ -517,10 +517,20 @@ uses Hibernate and this uses JDBC to connect to database. Check the graphic.
 - tests ok
 
 
+******************************
+Section 12: Hibernate Queries
+******************************
 
+branch: section12-hibernate-queries
 
-
-
+- implement the method listAuthorByLastNameLike in AuthorDao
+- Query class to specific query
+- TypedQuery for this new method: findByISBN (BookDao)... previously on getAuthorByName
+    - no needed to cast the singleResult
+    - It is a cleaner approach than Query
+- NamedQuery, findAll() in AuthorDao ... add @NamedQuery on Author class
+    - just declare at the class level and use in the implementation
+-
 
 
 
