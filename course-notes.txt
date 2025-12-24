@@ -493,3 +493,34 @@ Implement Author with List of Books
     - Use RowMapper when 1 row = 1 object and there are no joins 1-N
     - Use ResultSetExtractor when JOINs, 1-N, need to handle the cursor
 - integration tests ok
+
+* JDBC Template is easier than pure JDBC. The template simplifies code.
+
+**************************
+Section 11: Hibernate DAO
+**************************
+
+branch: section11-hibernate-dao
+
+- The graphic on PDF file is fascinating. It points that JPA or Hibernate Native API
+uses Hibernate and this uses JDBC to connect to database. Check the graphic.
+
+- In this section I'm using Hibernate API
+- config new project sdjpa-hibernate-dao
+- By using EntityManagerFactory and EntityManager implements the methods of author dao impl
+- Use of TypedQuery for specific queries. I think is verbose.
+- merge to update
+- if its a transaction such as save author, it's necessary to use entitymanager operations, check saveNewAuthor
+- Hibernate creates the sql for us
+- don't use transaction().begin() if there is a start somewhere else on the same transaction
+- close() helps Hikari to handle database connections and tests are running faster.
+-
+
+
+
+
+
+
+
+
+
