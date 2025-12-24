@@ -369,3 +369,16 @@ Composite Primary Key
 - create AuthorCompositeRepository
 - write a test on MySQLIntegrationTest (tests ok)
 
+----------------------------------------
+
+Embedded Composite Primary Key
+- create AuthorEmbedded, add @Table(name = "author_composite")
+- @EmbeddedId on NameId field and @Embeddable on class NameId
+- create AuthorEmbeddedRepository
+- write test. I see this is another way to create the same table without using schema.sql file. tests ok.
+
+
+
+
+
+

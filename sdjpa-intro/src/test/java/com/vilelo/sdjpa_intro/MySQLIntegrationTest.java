@@ -4,6 +4,7 @@ import com.vilelo.sdjpa_intro.domain.AuthorUuid;
 import com.vilelo.sdjpa_intro.domain.BookNatural;
 import com.vilelo.sdjpa_intro.domain.BookUuid;
 import com.vilelo.sdjpa_intro.domain.composite.AuthorComposite;
+import com.vilelo.sdjpa_intro.domain.composite.AuthorEmbedded;
 import com.vilelo.sdjpa_intro.domain.composite.NameId;
 import com.vilelo.sdjpa_intro.repositories.*;
 import org.junit.jupiter.api.Test;
@@ -37,6 +38,22 @@ public class MySQLIntegrationTest {
 
     @Autowired
     AuthorCompositeRepository authorCompositeRepository;
+
+    @Autowired
+    AuthorEmbeddedRepository authorEmbeddedRepository;
+
+    @Test
+    void testAuthorEmbedded() {
+        NameId nameId = new NameId("Julio", "Chacon");
+        AuthorEmbedded authorEmbedded = new AuthorEmbedded(nameId);
+        authorEmbedded.setCountry("PE");
+
+        AuthorEmbedded saved = authorEmbeddedRepository.save(authorEmbedded);
+        assertThat(saved).isNotNull();
+
+        Optional<AuthorEmbedded> fetched = authorEmbeddedRepository.findById(nameId);
+        assertThat(fetched).isNotNull();
+    }
 
     @Test
     void testAuthorComposite() {
