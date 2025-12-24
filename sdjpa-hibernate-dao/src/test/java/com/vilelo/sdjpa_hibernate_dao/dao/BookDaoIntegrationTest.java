@@ -1,5 +1,6 @@
 package com.vilelo.sdjpa_hibernate_dao.dao;
 
+import com.vilelo.sdjpa_hibernate_dao.domain.Author;
 import com.vilelo.sdjpa_hibernate_dao.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.EmptyResultDataAccessException;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -18,6 +21,13 @@ class BookDaoIntegrationTest {
 
     @Autowired
     BookDao bookDao;
+
+    @Test
+    void findAllTest() {
+        List<Book> books = bookDao.findAll();
+        assertThat(books).isNotNull();
+        assertThat(books.size()).isGreaterThan(0);
+    }
 
     @Test
     void getBookByIdTest() {

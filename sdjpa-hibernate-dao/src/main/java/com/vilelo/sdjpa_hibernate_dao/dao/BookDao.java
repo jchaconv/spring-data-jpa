@@ -2,7 +2,11 @@ package com.vilelo.sdjpa_hibernate_dao.dao;
 
 import com.vilelo.sdjpa_hibernate_dao.domain.Book;
 
+import java.util.List;
+
 public interface BookDao {
+
+    List<Book> findAll();
 
     Book findByISBN(String isbn);
 

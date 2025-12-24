@@ -533,5 +533,6 @@ branch: section12-hibernate-queries
 - NamedQueries, to group multiple NamedQuery ... see Author class annotations and getAuthorByName method
     - Name Queries allow for the reuse of the query in different parts of the application.
       While the DAO pattern is widely accepted, a larger and more complex application might not always follow it.
-- Assignment: Book → add findAll, edit findBookByTitle with NamedQueries
+- Assignment: Book → add findAll, edit findBookByTitle with NamedQueries --- tests ok
 
+- Criteria Query
