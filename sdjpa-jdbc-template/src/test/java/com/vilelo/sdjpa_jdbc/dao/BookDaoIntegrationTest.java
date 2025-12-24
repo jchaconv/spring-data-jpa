@@ -1,14 +1,15 @@
 package com.vilelo.sdjpa_jdbc.dao;
 
-import com.vilelo.sdjpa_jdbc.domain.Author;
 import com.vilelo.sdjpa_jdbc.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {"com.vilelo.sdjpa_jdbc.dao"})
@@ -32,14 +33,19 @@ class BookDaoIntegrationTest {
 
     @Test
     void saveNewBookTest() {
-        Book book = bookDao.saveNewBook(new Book("Book test", "132456770312", "Publisher test", getAuthor()));
-        assertThat(book).isNotNull();
+        Book book = new Book();
+        book.setTitle("Book test");
+        book.setIsbn("132456770312");
+        book.setPublisher("Publisher test");
+        book.setAuthorId(1L);
+        assertThat(bookDao.saveNewBook(book)).isNotNull();
     }
 
     @Test
     void testUpdateBook() {
-
-        Book saved = bookDao.saveNewBook(new Book("Book test 2", "132456770313", "Publisher test 2", getAuthor()));
+        Book newBook = new Book("Book test 2", "132456770313", "Publisher test 2");
+        newBook.setAuthorId(2L);
+        Book saved = bookDao.saveNewBook(newBook);
         saved.setTitle("Book test 3");
 
         Book updated = bookDao.updateBook(saved);
@@ -48,17 +54,11 @@ class BookDaoIntegrationTest {
 
     @Test
     void testDeleteBookById() {
-        Book saved = bookDao.saveNewBook(new Book("Book test 4", "132456770314", "Publisher test 4", getAuthor()));
+        Book saved = bookDao.saveNewBook(new Book("Book test 4", "132456770314", "Publisher test 4"));
         bookDao.deleteBookById(saved.getId());
-        Book deleted = bookDao.getById(saved.getId());
-        assertThat(deleted).isNull();
+        assertThrows(EmptyResultDataAccessException.class, () -> {
+            bookDao.getById(saved.getId());
+        });
     }
-
-    private Author getAuthor() {
-        Author author = new Author();
-        author.setId(3L);
-        return author;
-    }
-
 
 }

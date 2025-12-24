@@ -475,3 +475,10 @@ As I see every test performs a rollback, they have no impact on database table.
 * Test Driven Development helps you create better code and helps with your efficiency.
 Writing the tests first makes you think about the application code. Having the tests verifies
 the code is performing as expected and catches unintentional breaking changes.
+
+Assignment - Implement Book Dao
+- In mapRow method you can use column name or index.
+
+---------------------------------------
+
+Implement Author with List of Books
