@@ -416,3 +416,17 @@ Create AuthorDao and implementing getAuthorById()
 - create a test, I see that I don't have the validate maven error
   with both annotations is ok the test (ComponentScan and import)
 - write code to implementation with connection handling and integration test ok
+
+* it is possible to add a datasource connection in database option at the right panel intellij
+
+-----------------------------------------
+
+Using Prepared Statements
+- in a large busy database, you do get significant performance and improvements by using PreparedStatement instead of Statement.
+- PreparedStatement is secure against sql injection attacks
+- See AuthorDaoImpl
+
+-----------------------------------------
+
+Save new author
+- this operation is a little bit different because it also uses the findById method.

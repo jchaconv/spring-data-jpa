@@ -21,11 +21,21 @@ class AuthorDaoIntegrationTest {
     AuthorDao authorDao;
 
     @Test
-    void getAuthorTest() {
-
-        Author author = authorDao.getById(1L);
+    void getAuthorByIdTest() {
+        Author author = authorDao.getAuthorById(1L);
         assertThat(author).isNotNull();
+    }
 
+    @Test
+    void getAuthorByNameTest() {
+        Author author = authorDao.getAuthorByName("Craig", "Walls");
+        assertThat(author).isNotNull();
+    }
+
+    @Test
+    void saveNewAuthorTest() {
+        Author author = authorDao.saveNewAuthor(new Author("Julio", "Chacon"));
+        assertThat(author).isNotNull();
     }
 
 
