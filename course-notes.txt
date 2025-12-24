@@ -482,3 +482,14 @@ Assignment - Implement Book Dao
 ---------------------------------------
 
 Implement Author with List of Books
+- add @Transient in Author class
+- use author-with-list-books.sql script on AuthorDaoImpl getById
+- use AuthorExtractor
+- adapt AuthorMapper
+- test ok, debugger mode to see in detail the response
+- I saw in Chatgpt that this kind of configuration has a bad design
+- I made design changes, using the AuthorExtractor to handle the rows data.
+  Because ChatGpt says:
+    - Use RowMapper when 1 row = 1 object and there are no joins 1-N
+    - Use ResultSetExtractor when JOINs, 1-N, need to handle the cursor
+- integration tests ok

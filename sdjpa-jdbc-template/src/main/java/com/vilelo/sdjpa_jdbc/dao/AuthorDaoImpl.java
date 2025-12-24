@@ -1,6 +1,7 @@
 package com.vilelo.sdjpa_jdbc.dao;
 
 import com.vilelo.sdjpa_jdbc.domain.Author;
+import com.vilelo.sdjpa_jdbc.extractor.AuthorExtractor;
 import com.vilelo.sdjpa_jdbc.mapper.AuthorMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,7 +21,10 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public Author getAuthorById(Long id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM author WHERE id = ?", getRowMapper(), id);
+        String sql = "SELECT author.id as id, first_name, last_name, book.id as book_id, book.isbn, book.publisher, book.title FROM author\n" +
+                "LEFT OUTER JOIN book ON author.id = book.author_id WHERE author.id = ?";
+        //return jdbcTemplate.queryForObject("SELECT * FROM author WHERE id = ?", getRowMapper(), id);
+        return jdbcTemplate.query(sql, new AuthorExtractor(), id);
     }
 
     @Override
