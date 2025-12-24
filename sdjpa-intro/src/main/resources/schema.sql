@@ -1,9 +1,11 @@
 drop table if exists book;
-drop table if exists book_seq;
 drop table if exists author;
-drop table if exists author_seq;
 drop table if exists author_uuid;
 drop table if exists book_uuid;
+drop table if exists book_natural;
+drop table if exists author_composite;
+--drop table if exists author_seq;
+--drop table if exists book_seq;
 
 create table book (
                       id bigint not null auto_increment,
@@ -53,5 +55,23 @@ create table book_uuid
     publisher varchar(255),
     title varchar(255),
     primary key (id)
+) engine=InnoDB;
+
+
+create table book_natural
+(
+    title varchar(255) not null,
+    isbn varchar(255),
+    publisher varchar(255),
+    primary key (title)
+) engine=InnoDB;
+
+
+create table author_composite
+(
+    first_name varchar(255),
+    last_name varchar(255),
+    country varchar(255),
+    primary key (first_name, last_name)
 ) engine=InnoDB;
 

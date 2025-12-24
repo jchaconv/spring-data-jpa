@@ -1,10 +1,11 @@
 package com.vilelo.sdjpa_intro;
 
 import com.vilelo.sdjpa_intro.domain.AuthorUuid;
+import com.vilelo.sdjpa_intro.domain.BookNatural;
 import com.vilelo.sdjpa_intro.domain.BookUuid;
-import com.vilelo.sdjpa_intro.repositories.AuthorUuidRepository;
-import com.vilelo.sdjpa_intro.repositories.BookRepository;
-import com.vilelo.sdjpa_intro.repositories.BookUuidRepository;
+import com.vilelo.sdjpa_intro.domain.composite.AuthorComposite;
+import com.vilelo.sdjpa_intro.domain.composite.NameId;
+import com.vilelo.sdjpa_intro.repositories.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
@@ -30,6 +31,38 @@ public class MySQLIntegrationTest {
 
     @Autowired
     BookUuidRepository bookUuidRepository;
+
+    @Autowired
+    BookNaturalRepository bookNaturalRepository;
+
+    @Autowired
+    AuthorCompositeRepository authorCompositeRepository;
+
+    @Test
+    void testAuthorComposite() {
+        NameId nameId = new NameId("Julio", "Chacon");
+        AuthorComposite authorComposite = new AuthorComposite();
+        authorComposite.setFirstName(nameId.getFirstName());
+        authorComposite.setLastName(nameId.getLastName());
+        authorComposite.setCountry("PE");
+
+        AuthorComposite saved = authorCompositeRepository.save(authorComposite);
+        assertThat(saved).isNotNull();
+
+        Optional<AuthorComposite> fetched = authorCompositeRepository.findById(nameId);
+        assertThat(fetched).isNotNull();
+
+    }
+
+    @Test
+    void testBookNatural() {
+        BookNatural bookNatural = new BookNatural();
+        bookNatural.setTitle("My Book");
+        BookNatural saved = bookNaturalRepository.save(bookNatural);
+
+        Optional<BookNatural> fetched = bookNaturalRepository.findById(saved.getTitle());
+        assertThat(fetched).isNotNull();
+    }
 
     @Test
     void testBookUuid() {

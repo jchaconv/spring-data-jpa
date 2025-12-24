@@ -352,4 +352,20 @@ UUID RFC 4122 Primary Key
 
 ----------------------------------------
 
+Natural Primary Key
+- create table book_natural(add to the schema.sql), the title is the primary key
+- create BookNatural, the id just has @Id annotation
+- BookNaturalRepository and write test on MySQLIntegrationTest
+- test ok
+
+----------------------------------------
+
+Composite Primary Key
+- create table author_composite
+- none field is not null
+- the primary key is firstname and lastname
+- create AuthorComposite and NameId(this implements Serializable)
+- @IdClass(NameId.class) on AuthorComposite
+- create AuthorCompositeRepository
+- write a test on MySQLIntegrationTest (tests ok)
 
