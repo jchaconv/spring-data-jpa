@@ -47,6 +47,18 @@ class AuthorDaoIntegrationTest {
     }
 
     @Test
+    void getAuthorByNameCriteriaTest() {
+        Author author = authorDao.findAuthorByNameCriteria("Craig", "Walls");
+        assertThat(author).isNotNull();
+    }
+
+    @Test
+    void getAuthorByNameNativeTest() {
+        Author author = authorDao.findAuthorByNameNative("Craig", "Walls");
+        assertThat(author).isNotNull();
+    }
+
+    @Test
     void saveNewAuthorTest() {
         Author author = authorDao.saveNewAuthor(new Author("Julio", "Chacon"));
         System.out.println("=== New id: " + author.getId());

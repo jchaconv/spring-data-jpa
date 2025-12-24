@@ -535,4 +535,15 @@ branch: section12-hibernate-queries
       While the DAO pattern is widely accepted, a larger and more complex application might not always follow it.
 - Assignment: Book → add findAll, edit findBookByTitle with NamedQueries --- tests ok
 
-- Criteria Query
+- Criteria Query → really verbose (I won't use it)
+    - findAuthorByNameCriteria on AuthorDaoImpl
+
+- Native SQL Queries
+    - Why use Native SQL?
+        - Actually a number of reasons why to use native SQL. You might want to use
+        a function or provide a query hint to the database. Downside, is you might
+        use a vendor specific feature, thus affecting the portability of your code
+        to other database vendors. Not always a bad thing, just something to be aware of.
+
+    - findAuthorByNameNative on AuthorDaoImpl
+    - very simple code but need cast, I think it's ok
