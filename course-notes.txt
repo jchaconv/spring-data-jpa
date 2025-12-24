@@ -357,7 +357,7 @@ Natural Primary Key
 - create BookNatural, the id just has @Id annotation
 - BookNaturalRepository and write test on MySQLIntegrationTest
 - test ok
-
+- not considered best practice
 ----------------------------------------
 
 Composite Primary Key
@@ -368,6 +368,7 @@ Composite Primary Key
 - @IdClass(NameId.class) on AuthorComposite
 - create AuthorCompositeRepository
 - write a test on MySQLIntegrationTest (tests ok)
+- not considered best practice
 
 ----------------------------------------
 
@@ -376,9 +377,17 @@ Embedded Composite Primary Key
 - @EmbeddedId on NameId field and @Embeddable on class NameId
 - create AuthorEmbeddedRepository
 - write test. I see this is another way to create the same table without using schema.sql file. tests ok.
+- not considered best practice
 
+**********************************
+Section 9: DAO Pattern with JDBC
+**********************************
 
+branch: section9-dao-pattern-with-jdbc
 
+When to use JDBC directly to communicate with database? (This operation is without Hibernate)
 
-
-
+- config sdjpa-jdbc project
+- run mysqlusers.sql script in dbeaver
+- run integration tests to check if its correct my configuration
+- tests ok with, project configuration successful
