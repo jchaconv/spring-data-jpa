@@ -433,3 +433,10 @@ Save new author
 - this operation is a little bit different because it also uses the findById method.
 Update author
 Delete author by id
+
+-----------------------------------------
+
+Assignment - Implement Book DAO
+refactor author id to author
+    - @Transient to say to hibernate "don't use this property"
+all tests are ok
