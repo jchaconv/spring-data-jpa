@@ -387,6 +387,7 @@ branch: section9-dao-pattern-with-jdbc
 
 When to use JDBC directly to communicate with database? (This operation is without Hibernate)
 The DAO pattern encapsulates database operations from the rest of the application.
+Using JDBC at a low level to connect to database is really verbose.
 
 - config sdjpa-jdbc project
 - run mysqlusers.sql script in dbeaver
@@ -440,3 +441,37 @@ Assignment - Implement Book DAO
 refactor author id to author
     - @Transient to say to hibernate "don't use this property"
 all tests are ok
+
+
+**********************************
+Section 10: Spring JDBC Template
+**********************************
+
+branch: section10-spring-jdbc-template
+
+* In a Spring Application, JDBC Template provides a convenient abstraction to JDBC.
+Allows you to write less ceremonial code and be more productive.
+
+Spring JDBC Template simplifies the development.
+This is not Hibernate, we are just using an abstraction of JDBC
+We are mimicking the things that Hibernate does for us.
+
+* I see the importance of write tests to check If the development of the implementation is correct.
+As I see every test performs a rollback, they have no impact on database table.
+
+
+- config sdjpa-jdbc-template project (just copy the previous project and modify things)
+- all is the same, just delete the dao implementation code
+- Use the interface RowMapper, create AuthorMapper to implement the RowMapper
+- Use JdbcTemplate in AuthorDaoImpl. JdbcTemplate accepts all parameters needed for the query
+- implement get author by id → ok
+- Implement Find Author By Name → ok
+- save new author, use LAST_INSERT_ID() to the new search, it gets the last id of our session, specific of MySQL → ok
+- update author → ok
+- delete author → ok --- it changes the condition of the test to catch Exception
+
+---------------------------------------
+
+* Test Driven Development helps you create better code and helps with your efficiency.
+Writing the tests first makes you think about the application code. Having the tests verifies
+the code is performing as expected and catches unintentional breaking changes.
