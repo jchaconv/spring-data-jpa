@@ -391,3 +391,28 @@ When to use JDBC directly to communicate with database? (This operation is witho
 - run mysqlusers.sql script in dbeaver
 - run integration tests to check if its correct my configuration
 - tests ok with, project configuration successful
+
+-----------------------------------------
+
+Introduction to DAO Pattern
+- DAO: Data Access Object
+- Before JPA and ORM's
+- Older and uses JDBC
+- Common in legacy J2EE applications
+- Not common anymore, but is a good way to use JDBC
+- Similar to Repository Pattern used by Spring Data
+- Not utilize JPA Annotations
+- DAO API: provide CRUD operations(similar to Repository)
+- DAO Implementation: Implement persistence functionality
+
+- Typically with JDBC you manage the database connection
+- Spring Boot handles the connection for us
+- JDBC Template: Spring framework provides a helper abstraction over JDBC
+
+-----------------------------------------
+
+Create AuthorDao and implementing getAuthorById()
+- create interface and impl class
+- create a test, I see that I don't have the validate maven error
+  with both annotations is ok the test (ComponentScan and import)
+- write code to implementation with connection handling and integration test ok
