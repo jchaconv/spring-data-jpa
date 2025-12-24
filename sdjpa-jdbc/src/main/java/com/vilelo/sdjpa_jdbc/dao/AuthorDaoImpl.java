@@ -98,6 +98,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
             if (resultSet.next()) {
                 Long savedId = resultSet.getLong(1);
+                statement.close();
                 return this.getAuthorById(savedId);
             }
 
@@ -111,6 +112,53 @@ public class AuthorDaoImpl implements AuthorDao {
             }
         }
         return null;
+    }
+
+    @Override
+    public Author updateAuthor(Author author) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = source.getConnection();
+            preparedStatement = connection.prepareStatement("UPDATE author SET first_name = ?, last_name = ? WHERE id = ?");
+            preparedStatement.setString(1, author.getFirstName());
+            preparedStatement.setString(2, author.getLastName());
+            preparedStatement.setLong(3, author.getId());
+            preparedStatement.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                closeAll(resultSet, preparedStatement, connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return this.getAuthorById(author.getId());
+    }
+
+    @Override
+    public void deleteAuthorById(Long id) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            connection = source.getConnection();
+            preparedStatement = connection.prepareStatement("DELETE FROM author WHERE id = ?");
+            preparedStatement.setLong(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                closeAll(null, preparedStatement, connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private Author getAuthorFromResultSet(ResultSet resultSet) throws SQLException {

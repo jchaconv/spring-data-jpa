@@ -386,6 +386,7 @@ Section 9: DAO Pattern with JDBC
 branch: section9-dao-pattern-with-jdbc
 
 When to use JDBC directly to communicate with database? (This operation is without Hibernate)
+The DAO pattern encapsulates database operations from the rest of the application.
 
 - config sdjpa-jdbc project
 - run mysqlusers.sql script in dbeaver
@@ -430,3 +431,5 @@ Using Prepared Statements
 
 Save new author
 - this operation is a little bit different because it also uses the findById method.
+Update author
+Delete author by id
