@@ -347,5 +347,9 @@ UUID RFC 4122 Primary Key
 - SELECT * FROM book_uuid; ---> shows a binary id
 - select hex(id) from book_uuid; ---> shows this value hexa 9960DF5679ED494A883EF723338126FA
 - is the same value printed in console (saved book uuid)
+* remember to use local environment
+* I don't have the "varbinary" error on junit tests
 
 ----------------------------------------
+
+
