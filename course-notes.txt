@@ -514,7 +514,7 @@ uses Hibernate and this uses JDBC to connect to database. Check the graphic.
 - Hibernate creates the sql for us
 - don't use transaction().begin() if there is a start somewhere else on the same transaction
 - close() helps Hikari to handle database connections and tests are running faster.
--
+- tests ok
 
 
 

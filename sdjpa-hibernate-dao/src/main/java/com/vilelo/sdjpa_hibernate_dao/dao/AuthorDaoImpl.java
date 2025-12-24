@@ -49,9 +49,8 @@ public class AuthorDaoImpl implements AuthorDao {
     @Override
     public Author updateAuthor(Author author) {
         EntityManager entityManager = getEntityManager();
-
         try {
-            entityManager.joinTransaction(); // to see the update operation
+            entityManager.joinTransaction(); // Is a transaction previously crated?
             entityManager.merge(author);
             entityManager.flush();
             entityManager.clear();  // to clear the Hibernate cache

@@ -56,9 +56,8 @@ class BookDaoIntegrationTest {
     void testDeleteBookById() {
         Book saved = bookDao.saveNewBook(new Book("Book test 4", "132456770314", "Publisher test 4"));
         bookDao.deleteBookById(saved.getId());
-        assertThrows(EmptyResultDataAccessException.class, () -> {
-            bookDao.getById(saved.getId());
-        });
+        Book deleted = bookDao.getById(saved.getId());
+        assertThat(deleted).isNull();
     }
 
 }
