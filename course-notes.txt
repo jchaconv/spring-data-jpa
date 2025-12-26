@@ -637,7 +637,6 @@ SQL Paging
 
 SQL Sorting
     - ASC, Desc. Physical Order: often will return rows in the same order, but there is not guaranteed
-
 ----------------------------------
 
 Using JDBC Template
@@ -646,3 +645,14 @@ Using JDBC Template
 - create findAllBooks without and with parameters on BookDao and implement on jdbcImpl
 - very simple to use pageSize and offset with JDBC template, because it has a method that accepts those parameters
 - tests ok - pagination
+----------------------------------
+
+Find All Books Using Pageable
+- implement findAllBooks that receives Pageable
+- Pageable calculates the offset automatically
+- just need to provide the number of page and size
+- remember page 0 is the beginning of the table
+* I think this option is cleaner because avoids manual offset calculate
+----------------------------------
+
+Find All Books Order By Title

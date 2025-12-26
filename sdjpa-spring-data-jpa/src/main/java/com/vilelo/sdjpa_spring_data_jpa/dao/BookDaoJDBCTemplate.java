@@ -2,6 +2,7 @@ package com.vilelo.sdjpa_spring_data_jpa.dao;
 
 import com.vilelo.sdjpa_spring_data_jpa.domain.Book;
 import com.vilelo.sdjpa_spring_data_jpa.mapper.BookMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
@@ -12,6 +13,12 @@ public class BookDaoJDBCTemplate implements BookDao {
 
     public BookDaoJDBCTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public List<Book> findAllBooks(Pageable pageable) {
+        return jdbcTemplate.query("SELECT * FROM book limit ? offset ?", getBookMapper(),
+                pageable.getPageSize(), pageable.getOffset());
     }
 
     @Override
