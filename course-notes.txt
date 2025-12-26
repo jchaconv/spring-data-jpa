@@ -547,3 +547,16 @@ branch: section12-hibernate-queries
 
     - findAuthorByNameNative on AuthorDaoImpl
     - very simple code but need cast, I think it's ok
+
+
+************************************
+Section 13: Spring Data JPA Queries
+************************************
+
+branch: section13-spring-data-jpa-queries
+
+- every action in spring data jpa repository has its own transaction context
+- I added Transactional in the save method of AuthorDaoImpl
+    - I'm doing two database operations: read(getById) and write(save)
+    - You typically would want to perform multiple operations under a single transaction.
+
