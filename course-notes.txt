@@ -585,3 +585,17 @@ Stream Query Results
 
 - findAllByTitleNotNull on BookRepo
 - just test in RepoTest
+-----------------------------------
+
+Asynchronous Query Results
+* To improve response time on application(The main purpose) to complete things faster.
+* There are cases when you need to use this (Concurrent). When you do have to do multiple queries against a database.
+- Future
+- CompletableFuture
+- ListenableFuture
+* Use @Async in the methods declaration
+- Tests the methods in Repository:
+    - queryByTitle  ---> using Future
+-----------------------------------
+
+

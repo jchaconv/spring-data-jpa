@@ -8,6 +8,8 @@ import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabas
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -22,6 +24,14 @@ class BookRepositoryTest {
     private BookRepository bookRepository;
 
     private final static String VALID_BOOK_TITLE = "Spring in Action, 6th Edition";
+
+    @Test
+    void queryByTitle_Future_Success() throws ExecutionException, InterruptedException {
+        Future<Book> bookFuture = bookRepository.queryByTitle(VALID_BOOK_TITLE);
+        Book book = bookFuture.get();
+        assertNotNull(book);
+        assertEquals(VALID_BOOK_TITLE, book.getTitle());
+    }
 
     @Test
     void findAllByTitleNotNull_Success() {
