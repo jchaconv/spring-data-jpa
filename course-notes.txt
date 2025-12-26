@@ -599,11 +599,21 @@ Asynchronous Query Results
 -----------------------------------
 
 Declaring Queries and named parameters Using @Query
-
+- Using HQL
 - Not following convention method name
 - findBookByTitleWithQuery   ---> "?1" I've said I only have one parameter
 - findBookByTitleWithQueryNamed ---> @Param I've specified the name of the param to do a match
 - Use of @Query in the method declaration
 -----------------------------------
 
+Native SQL Queries
+- Spring Data JPA provides a lot of flexibility in how you write your queries against database
+- Using SQL (NOT HQL)findBookByTitleNativeQuery
+-  method
+- Also with @Query, but with the property nativeQuery=true
+-----------------------------------
+JPA Named Queries
 
+- @NamedQuery on the Entity Book
+- jpaNamed method on Repository
+- I saw that the use of @Param in this case is optional because the result is the same without it

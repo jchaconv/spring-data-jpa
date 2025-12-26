@@ -26,6 +26,19 @@ class BookRepositoryTest {
     private final static String VALID_BOOK_TITLE = "Spring in Action, 6th Edition";
 
     @Test
+    void jpaNamedQuery_Success() {
+        Book book = bookRepository.jpaNamed(VALID_BOOK_TITLE);
+        assertThat(book).isNotNull();
+        assertEquals(VALID_BOOK_TITLE, book.getTitle());
+    }
+
+    @Test
+    void findBookByTitleNativeQuery_Success() {
+        Book book = bookRepository.findBookByTitleNativeQuery(VALID_BOOK_TITLE);
+        assertThat(book).isNotNull();
+    }
+
+    @Test
     void findBookByTitleWithQueryNamed_Success() {
         Book book = bookRepository.findBookByTitleWithQueryNamed(VALID_BOOK_TITLE);
         assertThat(book).isNotNull();
