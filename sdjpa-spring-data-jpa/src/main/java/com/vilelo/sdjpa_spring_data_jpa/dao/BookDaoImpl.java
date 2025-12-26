@@ -1,0 +1,53 @@
+package com.vilelo.sdjpa_spring_data_jpa.dao;
+
+import com.vilelo.sdjpa_spring_data_jpa.domain.Book;
+import com.vilelo.sdjpa_spring_data_jpa.repositories.BookRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Component;
+
+import java.util.Optional;
+
+@Component
+public class BookDaoImpl implements BookDao {
+
+    private final BookRepository bookRepository;
+
+    public BookDaoImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    @Override
+    public Book getById(Long id) {
+        return bookRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Book findBookByTitle(String title) {
+        return bookRepository.findBookByTitle(title).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public Book saveNewBook(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @Transactional
+    @Override
+    public Book updateBook(Book book) {
+        Book foundBook = bookRepository.findById(book.getId()).orElse(null);
+        if (foundBook != null) {
+            foundBook.setIsbn(book.getIsbn());
+            foundBook.setPublisher(book.getPublisher());
+            foundBook.setAuthorId(book.getAuthorId());
+            foundBook.setTitle(book.getTitle());
+            return bookRepository.save(foundBook);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteBookById(Long id) {
+        bookRepository.deleteById(id);
+    }
+}

@@ -574,4 +574,14 @@ Query Methods:
 
 Null Handling
 
-- Use @Nullable in the repository method as another option instead of handling null values with Optional.
+- Use @Nullable(Jakarta) in the repository method as another option instead of handling null values with Optional.
+- findBookByTitle implements as normal operation
+- readByTitle do the same as findBookByTitle (tested in repo test)
+- getByTitle has @Nullable and returns null if does not find an entity or if the request param is null (tested in repo test)
+  This @Nullable does not throw EntityNotFoundException
+-----------------------------------
+
+Stream Query Results
+
+- findAllByTitleNotNull on BookRepo
+- just test in RepoTest
