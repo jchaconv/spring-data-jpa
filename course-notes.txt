@@ -555,8 +555,23 @@ Section 13: Spring Data JPA Queries
 
 branch: section13-spring-data-jpa-queries
 
+- I used the Repository pattern
 - every action in spring data jpa repository has its own transaction context
 - I added Transactional in the save method of AuthorDaoImpl
     - I'm doing two database operations: read(getById) and write(save)
     - You typically would want to perform multiple operations under a single transaction.
 
+-----------------------------------
+
+Query Methods:
+
+- Improves Developer Productivity. Query Methods are a very flexible and powerful tool in Spring Data JPA.
+- review docs: https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+- by creating this findAuthorByFirstNameAndLastName method in the Repository I can implement the dao method.
+  Jpa handles the query by the method name convention.
+- return Optional to throws an exception when Entity Not Found.
+-----------------------------------
+
+Null Handling
+
+- Use @Nullable in the repository method as another option instead of handling null values with Optional.

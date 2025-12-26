@@ -2,6 +2,7 @@ package com.vilelo.sdjpa_spring_data_jpa.dao;
 
 
 import com.vilelo.sdjpa_spring_data_jpa.domain.Author;
+import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
@@ -9,6 +10,7 @@ import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabas
 import org.springframework.context.annotation.ComponentScan;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ComponentScan(basePackages = {"com.vilelo.sdjpa_spring_data_jpa.dao"})
@@ -25,11 +27,18 @@ class AuthorDaoIntegrationTest {
         assertThat(author).isNotNull();
     }
 
-    /*@Test
+    @Test
     void getAuthorByNameTest() {
-        Author author = authorDao.getAuthorByName("Craig", "Walls");
+        Author author = authorDao.findAuthorByName("Craig", "Walls");
         assertThat(author).isNotNull();
-    }*/
+    }
+
+    @Test
+    void getAuthorByNameNotFoundTest() {
+        assertThrows(EntityNotFoundException.class, () -> {
+            authorDao.findAuthorByName("Maelo", "Ruiz");
+        });
+    }
 
     @Test
     void saveNewAuthorTest() {

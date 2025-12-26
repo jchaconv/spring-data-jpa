@@ -2,6 +2,7 @@ package com.vilelo.sdjpa_spring_data_jpa.dao;
 
 import com.vilelo.sdjpa_spring_data_jpa.domain.Author;
 import com.vilelo.sdjpa_spring_data_jpa.repositories.AuthorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,8 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public Author findAuthorByName(String firstName, String lastName) {
-        return null;
+        return authorRepository.findAuthorByFirstNameAndLastName(firstName, lastName)
+                .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
