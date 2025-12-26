@@ -26,6 +26,18 @@ class BookRepositoryTest {
     private final static String VALID_BOOK_TITLE = "Spring in Action, 6th Edition";
 
     @Test
+    void findBookByTitleWithQueryNamed_Success() {
+        Book book = bookRepository.findBookByTitleWithQueryNamed(VALID_BOOK_TITLE);
+        assertThat(book).isNotNull();
+    }
+
+    @Test
+    void findBookByTitleWithQuery_Success() {
+        Book book = bookRepository.findBookByTitleWithQuery(VALID_BOOK_TITLE);
+        assertThat(book).isNotNull();
+    }
+
+    @Test
     void queryByTitle_Future_Success() throws ExecutionException, InterruptedException {
         Future<Book> bookFuture = bookRepository.queryByTitle(VALID_BOOK_TITLE);
         Book book = bookFuture.get();

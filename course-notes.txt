@@ -598,4 +598,12 @@ Asynchronous Query Results
     - queryByTitle  ---> using Future
 -----------------------------------
 
+Declaring Queries and named parameters Using @Query
+
+- Not following convention method name
+- findBookByTitleWithQuery   ---> "?1" I've said I only have one parameter
+- findBookByTitleWithQueryNamed ---> @Param I've specified the name of the param to do a match
+- Use of @Query in the method declaration
+-----------------------------------
+
 
