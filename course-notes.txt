@@ -617,3 +617,32 @@ JPA Named Queries
 - @NamedQuery on the Entity Book
 - jpaNamed method on Repository
 - I saw that the use of @Param in this case is optional because the result is the same without it
+
+*******************************
+Section 14: Paging and Sorting
+*******************************
+
+branch: section14-paging-and-sorting
+
+Paging: Is a way to get a "page" of data from a long list of values.
+Sorting: How the data is ordered
+
+SQL Paging
+    - Limit: limits the number of rows returned
+    - Offset: Number of rows to skip over
+        - Example 30 records, 10 per page
+            - Page 1 - limit 10 - offset 0
+            - Page 2 - limit 10 - offset 10
+            - Page 3 - limit 10 - offset 20
+
+SQL Sorting
+    - ASC, Desc. Physical Order: often will return rows in the same order, but there is not guaranteed
+
+----------------------------------
+
+Using JDBC Template
+- use the last project sdjpa-spring-data-jpa
+- configure daoImpl with JDBC and tests
+- create findAllBooks without and with parameters on BookDao and implement on jdbcImpl
+- very simple to use pageSize and offset with JDBC template, because it has a method that accepts those parameters
+- tests ok - pagination
