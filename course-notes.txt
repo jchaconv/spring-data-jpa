@@ -806,6 +806,11 @@ Cascade on persist
 - look at the test saveOrder_WithLine_Success() --- ok
 ---------------------------
 Many to One Unidirectional
+- a product can have multiple lines
+    - @ManyToOne
+      private Product product;
+- is unidirectional because product does not have anything about lines
+---------------------------
 
 
 

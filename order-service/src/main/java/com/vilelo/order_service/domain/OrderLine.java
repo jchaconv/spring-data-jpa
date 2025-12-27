@@ -3,6 +3,8 @@ package com.vilelo.order_service.domain;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 @Entity
 public class OrderLine extends BaseEntity {
 
@@ -10,6 +12,9 @@ public class OrderLine extends BaseEntity {
 
     @ManyToOne
     private OrderHeader orderHeader;
+
+    @ManyToOne
+    private Product product;
 
     public Integer getQuantityOrdered() {
         return quantityOrdered;
@@ -25,5 +30,26 @@ public class OrderLine extends BaseEntity {
 
     public void setOrderHeader(OrderHeader orderHeader) {
         this.orderHeader = orderHeader;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        OrderLine orderLine = (OrderLine) o;
+        return Objects.equals(quantityOrdered, orderLine.quantityOrdered) && Objects.equals(orderHeader, orderLine.orderHeader) && Objects.equals(product, orderLine.product);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), quantityOrdered, orderHeader, product);
     }
 }
