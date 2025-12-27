@@ -4,8 +4,10 @@ import com.vilelo.sdjpa_spring_data_jpa.domain.Author;
 import com.vilelo.sdjpa_spring_data_jpa.repositories.AuthorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -15,6 +17,11 @@ public class AuthorDaoImpl implements AuthorDao {
 
     public AuthorDaoImpl(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
+    }
+
+    @Override
+    public List<Author> findAllAuthorsByLastName(String lastName, Pageable pageable) {
+        return null;
     }
 
     @Override

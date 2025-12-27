@@ -22,6 +22,9 @@ Spring Data JPA:
     - You provide the interface and SDJ the implementation
 
 -----------------------------
+* For tests integration with MySQL is good practice to have a specific env for tests
+and in prod env delete this property: spring.sql.init.mode=always
+@ActivesProfiles("local")
 
 Create a project: sdjpa-intro, java 17
 dependencies: web, jpa and h2
@@ -656,3 +659,12 @@ Find All Books Using Pageable
 ----------------------------------
 
 Find All Books Order By Title
+- using pageable and "desc" as parameter in methods
+----------------------------------
+
+Assignment - impl find authors by last name
+- I added a script in schema.sql to have multiple authors with same last_name
+- findAllAuthorsByLastName AuthorDao
+- Sort.Direction.DESC instead of Sort.Order.desc (both work correctly)
+- use of StringBuilder to provide flexibility to the query
+- the field "properties" with value "myName" could have any value, it's just a reference

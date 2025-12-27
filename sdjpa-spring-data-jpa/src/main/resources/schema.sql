@@ -36,10 +36,10 @@ insert into author (first_name, last_name) values ('Eric', 'Evans');
 insert into book (isbn, publisher, title, author_id) values ('978-0321125217', 'Addison Wesley',
                                                              'Domain-Driven Design',(select id from author where first_name = 'Eric' and last_name = 'Evans') );
 
-insert into author (first_name, last_name) values ('Robert', 'Martin');
+insert into author (first_name, last_name) values ('Hugo', 'Martin');
 
 insert into book (isbn, publisher, title, author_id) values ('978-0134494166', 'Addison Wesley',
-                                                             'Clean Code',(select id from author where first_name = 'Robert' and last_name = 'Martin') );
+                                                             'Clean Code',(select id from author where first_name = 'Hugo' and last_name = 'Martin') );
 
 -- to test pagination and sorting
 
@@ -92,4 +92,29 @@ INSERT INTO book (isbn, publisher, title, author_id) VALUES
                                                          ('978-0134494326', 'Addison-Wesley', 'Domain-Driven Design', 3);
 
 
+insert into author (first_name, last_name) values ('Sonny', 'Walls');
+insert into author (first_name, last_name) values ('John', 'Walls');
+insert into author (first_name, last_name) values ('Emily', 'Walls');
+insert into author (first_name, last_name) values ('Michael', 'Walls');
 
+insert into author (first_name, last_name) values ('James', 'Martin');
+insert into author (first_name, last_name) values ('Laura', 'Martin');
+insert into author (first_name, last_name) values ('Beatriz', 'Martin');
+
+insert into author (first_name, last_name) values ('Joshua', 'Martin');
+insert into author (first_name, last_name) values ('Samuel', 'Martin');
+insert into author (first_name, last_name) values ('Daniel', 'Martin');
+
+insert into author (first_name, last_name) values ('Martin', 'Fowler');
+insert into author (first_name, last_name) values ('Rebecca', 'Fowler');
+insert into author (first_name, last_name) values ('Thomas', 'Fowler');
+
+insert into author (first_name, last_name) values ('Kent', 'Beck');
+insert into author (first_name, last_name) values ('Eric', 'Beck');
+insert into author (first_name, last_name) values ('Susan', 'Beck');
+
+insert into author (first_name, last_name) values ('Brian', 'Martin');
+insert into author (first_name, last_name) values ('Kevin', 'Martin');
+
+insert into author (first_name, last_name) values ('Linus', 'Torvalds');
+insert into author (first_name, last_name) values ('Maria', 'Torvalds');
