@@ -701,3 +701,16 @@ Query, paging and sorting with Spring Data JPA
 - the property in Sort.Order.desc it's necessary and needs to be matched with entity param
 
 ----------------------------------
+
+************************************
+Section 15: Hibernate Java Mappings
+*************************************
+
+branch: section15-hibernate-java-mappings
+
+- config new project order-service. spring web, spring data jpa, mysql and java 17
+- run mysqlinit.sql script in dbeaver
+- run test - ok
+----------------------------
+Jpa Inheritance
+-
