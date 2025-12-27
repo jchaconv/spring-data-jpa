@@ -1,11 +1,10 @@
 package com.vilelo.order_service.domain;
 
 import com.vilelo.order_service.domain.enums.ProductStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Product extends BaseEntity {
@@ -14,6 +13,12 @@ public class Product extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ProductStatus productStatus;
+
+    @ManyToMany
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+                inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
     public String getDescription() {
         return description;
@@ -29,6 +34,14 @@ public class Product extends BaseEntity {
 
     public void setProductStatus(ProductStatus productStatus) {
         this.productStatus = productStatus;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     @Override

@@ -814,6 +814,15 @@ Many to One Unidirectional
 Association Helper Methods
 - add method to OrderHeader. this method handling the relationship between OrderHeader and OrderLine
 - to do not manually on tests
+---------------------------
+Many to Many
+- script of category and product_category tables
+- Use @ManyToMany on Category and its properties
+    - equals method without the products to avoid infinite loops
+- do the same on Product and change the properties.
+    - not update the equals and hascode methods to avoid loops
+- debug mode ProductRepositoryTest getCategory_Success()
+- there is a circular reference, is that ok?
 
 
 
