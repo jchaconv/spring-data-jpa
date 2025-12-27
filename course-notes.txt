@@ -662,9 +662,24 @@ Find All Books Order By Title
 - using pageable and "desc" as parameter in methods
 ----------------------------------
 
-Assignment - impl find authors by last name
+Assignment - impl find authors by last name - end of JDBC Template
 - I added a script in schema.sql to have multiple authors with same last_name
 - findAllAuthorsByLastName AuthorDao
 - Sort.Direction.DESC instead of Sort.Order.desc (both work correctly)
 - use of StringBuilder to provide flexibility to the query
 - the field "properties" with value "myName" could have any value, it's just a reference
+
+----------------------------------
+
+Paging with Hibernate
+- Create the daoImpl BookDaoHibernate ... test this → findAllBooks(Pageable)
+- Using TypedQuery and firstResult and MaxResult to map offset and pageSize
+
+Sorting with Hibernate
+- by using hql and calling the property "title" → findAllBooksSortByTitle
+- author impl: "SELECT a FROM Author a WHERE a.lastName =:lastName";
+- If I provide a property that indicates some need of logic to sorting, then the hql grows.
+
+----------------------------------
+
+Paging with Spring Data JPA
