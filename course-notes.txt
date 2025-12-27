@@ -627,6 +627,8 @@ Section 14: Paging and Sorting
 
 branch: section14-paging-and-sorting
 
+* lot of tests in this section
+
 Paging: Is a way to get a "page" of data from a long list of values.
 Sorting: How the data is ordered
 
@@ -683,3 +685,19 @@ Sorting with Hibernate
 ----------------------------------
 
 Paging with Spring Data JPA
+- BookDaoImpl. Use findAll() of JpaRepository
+    - PageRequest
+    - pageable.getContent()
+    - I see the use of two methods, one to provide the two ints and the other one
+      with the use of pageable as a request parameter
+
+Sorting with Spring Data JPA
+- BookDaoImpl findAllBooksSortByTitle
+- Use Page<Book> and getContent() ... very simple implementation
+- no need to specify something more about the sort property
+
+Query, paging and sorting with Spring Data JPA
+- findAllAuthorsByLastName()  --- very simple implementation on this
+- the property in Sort.Order.desc it's necessary and needs to be matched with entity param
+
+----------------------------------

@@ -48,7 +48,7 @@ INSERT INTO book (isbn, publisher, title, author_id) VALUES
                                                          ('978-0134685991', 'Addison-Wesley', 'Effective Java', 2),
                                                          ('978-0596007126', 'O’Reilly Media', 'Head First Design Patterns', 3),
                                                          ('978-1617294945', 'Manning', 'Spring in Action', 1),
-                                                         ('978-0132350884', 'Prentice Hall', 'Clean Code', 2),
+                                                         ('978-0132350884', 'Prentice Hall', 'Clean Codes', 2),
                                                          ('978-1492078005', 'O’Reilly Media', 'Kubernetes Up and Running', 3),
                                                          ('978-1788627992', 'Packt', 'Hands-On Machine Learning', 1),
                                                          ('978-0134494166', 'Addison-Wesley', 'Clean Architecture', 2),
@@ -92,8 +92,8 @@ INSERT INTO book (isbn, publisher, title, author_id) VALUES
                                                          ('978-0134494326', 'Addison-Wesley', 'Domain-Driven Design', 3);
 
 
-insert into author (first_name, last_name) values ('Sonny', 'Walls');
 insert into author (first_name, last_name) values ('John', 'Walls');
+insert into author (first_name, last_name) values ('Sonny', 'Walls');
 insert into author (first_name, last_name) values ('Emily', 'Walls');
 insert into author (first_name, last_name) values ('Michael', 'Walls');
 
