@@ -3,6 +3,8 @@ package com.vilelo.order_service.domain;
 import com.vilelo.order_service.domain.enums.OrderStatus;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @AttributeOverrides({
         @AttributeOverride(
@@ -51,6 +53,9 @@ public class OrderHeader extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    @OneToMany(mappedBy = "orderHeader", cascade = CascadeType.PERSIST)
+    private Set<OrderLine> orderLines;
+
     public String getCustomer() {
         return customer;
     }
@@ -81,6 +86,14 @@ public class OrderHeader extends BaseEntity {
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Set<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(Set<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 
     //equals and hashcode

@@ -749,3 +749,90 @@ Hibernate Update Date
 - just in schema.sql
 - mark the field just with @UpdateTimestamp
 - save order test ok
+
+*******************************************
+Section 16: Database Relationship Mappings
+*******************************************
+
+branch: section16-database-relationship-mappings
+
+- One to One
+- One to Many
+- Many to Many: Join table
+
+Relationship Direction:
+- Bi-Directional
+- Uni-Directional
+
+@ForeignKey not necessary with Flyway
+---------------------------
+One to many
+- create order-line table (schema.sql) and OrderLine entity
+- In this example an Order (Order_Header) can have multiple lines (Order_Line)
+- That's why orderHeader is marked with @ManyToOne in OrderLine class
+* Always start mapping the relationship owner, in this case OrderLine because it has the FOREIGN_KEY (order_header_id)
+- Then use @OneToMany(mappedBy = "orderHeader") to indicate the OrderHeader that just read the relationship that is mapped in OrderLine.
+- Set collection does not allow duplicate records
+- test ok
+---------------------------
+Cascade on persist
+- multiple options:
+    cascade = {
+        CascadeType.PERSIST,
+        CascadeType.MERGE,
+        CascadeType.REMOVE,
+        CascadeType.REFRESH,
+        CascadeType.DETACH
+    }
+
+- Let's modify the OrderHeader class.
+* Remember that an OrderLine doesn't exist without an OrderHeader
+- That's why I need to add "cascade = CascadeType.PERSIST" in the orderLines mapping
+    - PERSIST
+        - is the correct option because it saves a new object
+        - this option saves children automatically.
+        - saves OrderHeader without manually saving OrderLine
+        - just applicable to "save" but not to "delete" operation
+    - ALL
+        - if I use this option all operations are performed to father and children
+        - if I delete the father(order) I also deleted the children(lines)
+        - So, this is useful because if I persist a orderHeader instance that have one or multiple orderLines
+        - use it when the child can live without the father. example: blog -> comment
+        * dangerous example: order -> product (X)
+
+  Hibernate automatically persist the orderLine in its appropriate table
+    - persist(orderHeader);
+    - persist(orderLine); // automatically
+- look at the test saveOrder_WithLine_Success() --- ok
+---------------------------
+Many to One Unidirectional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
