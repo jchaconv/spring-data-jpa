@@ -1,25 +1,55 @@
 package com.vilelo.order_service.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.vilelo.order_service.domain.enums.OrderStatus;
+import jakarta.persistence.*;
 
 @Entity
-public class OrderHeader {
+@AttributeOverrides({
+        @AttributeOverride(
+                name = "shippingAddress.address",
+                column = @Column(name = "shipping_address")
+        ),
+        @AttributeOverride(
+                name = "shippingAddress.city",
+                column = @Column(name = "shipping_city")
+        ),
+        @AttributeOverride(
+                name = "shippingAddress.state",
+                column = @Column(name = "shipping_state")
+        ),
+        @AttributeOverride(
+                name = "shippingAddress.zipCode",
+                column = @Column(name = "shipping_zip_code")
+        ),
+        @AttributeOverride(
+                name = "billToAddress.address",
+                column = @Column(name = "bill_to_address")
+        ),
+        @AttributeOverride(
+                name = "billToAddress.city",
+                column = @Column(name = "bill_to_city")
+        ),
+        @AttributeOverride(
+                name = "billToAddress.state",
+                column = @Column(name = "bill_to_state")
+        ),
+        @AttributeOverride(
+                name = "billToAddress.zipCode",
+                column = @Column(name = "bill_to_zip_code")
+        )
+})
+public class OrderHeader extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String customer;
 
-    public Long getId() {
-        return id;
-    }
+    @Embedded
+    private Address shippingAddress;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Embedded
+    private Address billToAddress;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     public String getCustomer() {
         return customer;
@@ -28,4 +58,31 @@ public class OrderHeader {
     public void setCustomer(String customer) {
         this.customer = customer;
     }
+
+    public Address getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Address getBillToAddress() {
+        return billToAddress;
+    }
+
+    public void setBillToAddress(Address billToAddress) {
+        this.billToAddress = billToAddress;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    //equals and hashcode
+
 }

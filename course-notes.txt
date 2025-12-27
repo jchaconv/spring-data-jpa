@@ -713,4 +713,39 @@ branch: section15-hibernate-java-mappings
 - run test - ok
 ----------------------------
 Jpa Inheritance
--
+- Mapped Super Class (85% of use cases)
+    - Account
+        - CreditAccount
+            - creditLimit
+        - DebitAccount
+            - overdraftFee
+- Single Table --- @Inheritance default, as we work until here, one class one table
+    - DTYPE: a default column
+- Joined Table
+- Table Per Class
+----------------------------
+JPA Mapped Super Class
+- create BaseEntity as abstract class with @MappedSuperclass
+- edit OrderHeader, now id is a property of BaseEntity
+----------------------------
+Embedded Types
+- add script alter_table_order_header.sql
+- create Address and mark with @Embeddable to use its properties
+- In OrderHeader mark the multiple Addresses with @Embedded
+- tell hibernate how to map the properties with:
+    - @AttributeOverrides, @AttributeOverride and @Column
+----------------------------
+Java Enumerated Types
+- use order_status.sql
+- mark the new property with @Enumerated(EnumType.STRING)
+- test save order ok
+----------------------------
+Hibernate Created Date
+- created date script (just in schema.sql)
+- add in BaseEntity and mark with @CreationTimestamp and @Column(updatable = false)
+- test ok, I saw the timestamp value created in debug mode
+----------------------------
+Hibernate Update Date
+- just in schema.sql
+- mark the field just with @UpdateTimestamp
+- save order test ok

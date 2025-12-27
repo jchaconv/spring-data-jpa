@@ -10,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -31,9 +32,8 @@ class OrderHeaderRepositoryTest {
         Optional<OrderHeader> fetchedOrder = orderHeaderRepository.findById(savedOrder.getId());
 
         assertNotNull(fetchedOrder);
-        assertNotNull(fetchedOrder.get().getId());
+        assertTrue(fetchedOrder.isPresent());
+        assertNotNull(fetchedOrder.get().getCreatedDate());
+        assertNotNull(fetchedOrder.get().getLastModifiedDate());
     }
-
-
-
 }
