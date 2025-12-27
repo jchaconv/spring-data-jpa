@@ -811,7 +811,9 @@ Many to One Unidirectional
       private Product product;
 - is unidirectional because product does not have anything about lines
 ---------------------------
-
+Association Helper Methods
+- add method to OrderHeader. this method handling the relationship between OrderHeader and OrderLine
+- to do not manually on tests
 
 
 
