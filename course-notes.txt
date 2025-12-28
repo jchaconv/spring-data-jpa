@@ -839,30 +839,8 @@ Cascade Delete
 - add CascadeType.REMOVE to orderLines in OrderHeader
 - that means when I delete the OrderHeader all OrderLines associate to that OrderHeader will be deleted too.
 - with this configuration I can delete an OrderHeader and Hibernate handles the deletion of OrderLine(s) associate.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------
+Orphan Removal: has no dependency of any table
+- See this test deleteOrderApproval_Cascade_Success() by default I don't see the deletion of the order_approval record
+- add this in OrderHeader: orphanRemoval = true
+- it is an unusual feature, but now I see the deletion of the record.

@@ -120,4 +120,35 @@ class OrderHeaderRepositoryTest {
         });
 
     }
+
+    @Test
+    void deleteOrderApproval_Cascade_Success() {
+
+        Customer customer = new Customer();
+        customer.setCustomerName("New Customer");
+
+        OrderLine orderLine = new OrderLine();
+        orderLine.setQuantityOrdered(3);
+        orderLine.setProduct(product);
+
+        OrderApproval orderApproval = new OrderApproval();
+        orderApproval.setApprovedBy("Julio Chacon");
+
+        OrderHeader orderHeader = new OrderHeader();
+        orderHeader.setCustomer(customer);
+        orderHeader.addOrderLine(orderLine);
+        orderHeader.setOrderApproval(orderApproval);
+
+        OrderHeader savedOrder = orderHeaderRepository.saveAndFlush(orderHeader);
+
+        System.out.println("====== Order saved and flushed");
+
+        orderHeaderRepository.deleteById(savedOrder.getId());
+        orderHeaderRepository.flush();
+
+        assertThrows(NoSuchElementException.class, () -> {
+            orderHeaderRepository.findById(savedOrder.getId()).orElseThrow();
+        });
+
+    }
 }
