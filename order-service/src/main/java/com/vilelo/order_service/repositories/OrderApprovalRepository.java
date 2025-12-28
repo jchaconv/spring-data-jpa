@@ -1,4 +1,7 @@
 package com.vilelo.order_service.repositories;
 
-public interface OrderApprovalRepository {
+import com.vilelo.order_service.domain.OrderApproval;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderApprovalRepository extends JpaRepository<OrderApproval, Long> {
 }

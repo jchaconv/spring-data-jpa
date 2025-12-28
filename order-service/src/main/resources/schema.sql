@@ -4,6 +4,8 @@ drop table if exists order_header cascade;
 drop table if exists product_category cascade;
 drop table if exists category cascade;
 drop table if exists product cascade;
+drop table if exists customer cascade;
+drop table if exists order_approval cascade;
 
 create table order_header
 (
@@ -106,3 +108,50 @@ where p.description = 'PRODUCT1' and c.description = 'CAT3';
 insert into product_category (product_id, category_id)
 SELECT p.id, c.id FROM product p, category c
 where p.description = 'PRODUCT4' and c.description = 'CAT3';
+
+-- add customer entity
+
+create table customer
+(
+    id                 bigint not null auto_increment primary key,
+    customer_name      varchar(50),
+    address            varchar(30),
+    city      varchar(30),
+    state     varchar(30),
+    zip_code  varchar(30),
+    phone              varchar(20),
+    email              varchar(255),
+    created_date       timestamp,
+    last_modified_date timestamp
+);
+
+alter table order_header
+    add column customer_id bigint;
+
+alter table order_header
+    add constraint order_customer_fk
+        foreign key (customer_id) references customer (id);
+
+alter table order_header drop column customer;
+
+insert into customer (customer_name, address, city, state, zip_code, phone, email)
+values ('Customer 1', '123 Duval', 'Key West', 'FL', '33040', '305.292.1435',
+        'cheeseburger@margaritville.com' );
+
+update order_header set order_header.customer_id = (select id from customer limit 1);
+
+-- one to one relationship
+create table order_approval
+(
+    id                 bigint not null auto_increment primary key,
+    approved_by        varchar(50),
+    created_date       timestamp,
+    last_modified_date timestamp
+);
+
+alter table order_header
+    add column order_approval_id bigint;
+
+alter table order_header
+    add constraint order_approval_fk
+        foreign key (order_approval_id) references order_approval (id);

@@ -1,4 +1,7 @@
 package com.vilelo.order_service.repositories;
 
-public interface CustomerRepository {
+import com.vilelo.order_service.domain.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }

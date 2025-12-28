@@ -1,8 +1,6 @@
 package com.vilelo.order_service.repositories;
 
-import com.vilelo.order_service.domain.OrderHeader;
-import com.vilelo.order_service.domain.OrderLine;
-import com.vilelo.order_service.domain.Product;
+import com.vilelo.order_service.domain.*;
 import com.vilelo.order_service.domain.enums.ProductStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,7 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +25,12 @@ class OrderHeaderRepositoryTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    CustomerRepository customerRepository;
+
+    @Autowired
+    OrderApprovalRepository orderApprovalRepository;
+
     Product product;
 
     @BeforeEach
@@ -39,7 +44,11 @@ class OrderHeaderRepositoryTest {
     @Test
     void saveOrder_WithLine_Success() {
         OrderHeader orderHeader = new OrderHeader();
-        orderHeader.setCustomer("New Customer");
+        Customer customer = new Customer();
+        customer.setCustomerName("New Customer");
+        Customer savedCustomer = customerRepository.save(customer);
+
+        orderHeader.setCustomer(savedCustomer);
 
         OrderLine orderLine = new OrderLine();
         orderLine.setQuantityOrdered(5);
@@ -48,6 +57,12 @@ class OrderHeaderRepositoryTest {
         //orderHeader.setOrderLines(Set.of(orderLine));
         //orderLine.setOrderHeader(orderHeader);
         orderHeader.addOrderLine(orderLine);
+
+        OrderApproval orderApproval = new OrderApproval();
+        orderApproval.setApprovedBy("me");
+        //OrderApproval savedOrderApproval = orderApprovalRepository.save(orderApproval);
+        //orderHeader.setOrderApproval(savedOrderApproval);
+        orderHeader.setOrderApproval(orderApproval);
 
         OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
 
@@ -65,7 +80,7 @@ class OrderHeaderRepositoryTest {
     @Test
     void saveOrder_Success() {
         OrderHeader orderHeader = new OrderHeader();
-        orderHeader.setCustomer("New Customer");
+        orderHeader.setCustomer(customerRepository.save(new Customer()));
         OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
 
         assertNotNull(savedOrder);
@@ -77,5 +92,32 @@ class OrderHeaderRepositoryTest {
         assertTrue(fetchedOrder.isPresent());
         assertNotNull(fetchedOrder.get().getCreatedDate());
         assertNotNull(fetchedOrder.get().getLastModifiedDate());
+    }
+
+    @Test
+    void deleteOrderHeader_Cascade_Success() {
+
+        Customer customer = new Customer();
+        customer.setCustomerName("New Customer");
+
+        OrderLine orderLine = new OrderLine();
+        orderLine.setQuantityOrdered(3);
+        orderLine.setProduct(product);
+
+        OrderHeader orderHeader = new OrderHeader();
+        orderHeader.setCustomer(customer);
+        orderHeader.addOrderLine(orderLine);
+
+        OrderHeader savedOrder = orderHeaderRepository.saveAndFlush(orderHeader);
+
+        System.out.println("====== Order saved and flushed");
+
+        orderHeaderRepository.deleteById(savedOrder.getId());
+        orderHeaderRepository.flush();
+
+        assertThrows(NoSuchElementException.class, () -> {
+            orderHeaderRepository.findById(savedOrder.getId()).orElseThrow();
+        });
+
     }
 }

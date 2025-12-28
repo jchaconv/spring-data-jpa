@@ -43,7 +43,8 @@ import java.util.Set;
 })
 public class OrderHeader extends BaseEntity {
 
-    private String customer;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Customer customer;
 
     @Embedded
     private Address shippingAddress;
@@ -54,8 +55,11 @@ public class OrderHeader extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "orderHeader", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "orderHeader", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private Set<OrderLine> orderLines;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private OrderApproval orderApproval;
 
     public void addOrderLine(OrderLine orderLine) {
         if(orderLines == null) {
@@ -65,11 +69,11 @@ public class OrderHeader extends BaseEntity {
         orderLine.setOrderHeader(this);
     }
 
-    public String getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -103,6 +107,14 @@ public class OrderHeader extends BaseEntity {
 
     public void setOrderLines(Set<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public OrderApproval getOrderApproval() {
+        return orderApproval;
+    }
+
+    public void setOrderApproval(OrderApproval orderApproval) {
+        this.orderApproval = orderApproval;
     }
 
     //equals and hashcode

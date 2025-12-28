@@ -820,11 +820,25 @@ Many to Many
 - Use @ManyToMany on Category and its properties
     - equals method without the products to avoid infinite loops
 - do the same on Product and change the properties.
-    - not update the equals and hascode methods to avoid loops
+    - not update the equals and hashcode methods to avoid loops
 - debug mode ProductRepositoryTest getCategory_Success()
 - there is a circular reference, is that ok?
-
-
+---------------------------
+Assignment - add customer entity
+- relationship between customer and orderheader
+- FetchType.LAZY --- not received until the specific query, ex: order.getClient()
+- I think by default is EAGER. In my case I don't specified.
+- better throughput
+---------------------------
+One to one
+- order_approval, map with @OneToOne on OrderHeader class
+- the insert was performed correctly: insert into order_approval (approved_by,created_date,last_modified_date) values (?,?,?)
+- I modified the test to NOT use the approvalRepo, test ok, CascadeType.PERSIST works fine
+---------------------------
+Cascade Delete
+- add CascadeType.REMOVE to orderLines in OrderHeader
+- that means when I delete the OrderHeader all OrderLines associate to that OrderHeader will be deleted too.
+- with this configuration I can delete an OrderHeader and Hibernate handles the deletion of OrderLine(s) associate.
 
 
 
