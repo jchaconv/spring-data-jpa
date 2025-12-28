@@ -913,3 +913,7 @@ Transactional Proxy Mode
 - the problem is solved, I think this is a proxy mode, use a spring bean to handle the transactional logic
 -----------------------------
 Adding Version Property
+- edit schema.sql
+- edit Customer and use @Version of jakarta
+- version is populated automatically with 0 by Hibernate if I don't specified
+-----------------------------

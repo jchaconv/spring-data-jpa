@@ -79,14 +79,14 @@ public class DataLoadTest {
 
     }
 
-    @Disabled
+    //@Disabled
     @Rollback(value = false)
     @Test
     void testDataLoader() {
         List<Product> products = loadProducts();
         Customer customer = loadCustomers();
 
-        int ordersToCreate = 20000;
+        int ordersToCreate = 200;
 
         for (int i = 0; i < ordersToCreate; i++){
             System.out.println("Creating order #: " + i);

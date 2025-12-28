@@ -1,6 +1,8 @@
 package com.vilelo.order_service.bootstrap;
 
+import com.vilelo.order_service.domain.Customer;
 import com.vilelo.order_service.domain.OrderHeader;
+import com.vilelo.order_service.repositories.CustomerRepository;
 import com.vilelo.order_service.repositories.OrderHeaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,16 +11,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class Bootstrap implements CommandLineRunner {
 
-    @Autowired
-    OrderHeaderRepository orderHeaderRepository;
+    /*@Autowired
+    OrderHeaderRepository orderHeaderRepository;*/
 
     @Autowired
     BootstrapOrderService bootstrapOrderService;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Override
     public void run(String... args) throws Exception {
         //readOrderData();
         bootstrapOrderService.readOrderData();
+
+        Customer customer = new Customer();
+        customer.setCustomerName("Testing version");
+        Customer savedCustomer = customerRepository.save(customer);
+
+        System.out.println("==== Version is: " + savedCustomer.getVersion());
+
+        customerRepository.deleteById(savedCustomer.getId());
     }
 
 
