@@ -22,7 +22,7 @@ class ProductRepositoryTest {
 
     @Test
     void getCategory_Success() {
-        Product product = productRepository.findByDescription("PRODUCT1");
+        Product product = productRepository.findByDescription("PRODUCT1").get();
         assertNotNull(product);
         assertNotNull(product.getCategories());
     }

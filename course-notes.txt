@@ -849,3 +849,28 @@ one2one bi-directional
 - bi-directional because each table has the id to reference the other table
 - alter order_approval to have order_header_id and a constraint
 - test ok, I added a no validation at the beginning of the schema.sql
+
+*****************************
+Section 17: Fetch Operations
+*****************************
+
+* Jpa Buddy plugin
+
+branch: section17-fetch-operations
+
+Load test data:
+- @Rollback(value = false) to persist data in table
+- I added Disabled to not modify the table
+-----------------------
+Lazy vs Eager Fetch
+- Eager by default
+- lazyVsEager() test, comment the schema.sql to make still available records
+- In OrderHeader add fetch = FetchType.LAZY to not get this data in the query
+  We only get this customer when we ask for it explicitly
+- see queries performed in tests logs  --> saved in evidence-lazy-query-customer.sql (ctrl+alt+L to format)
+
+
+
+
+
+
