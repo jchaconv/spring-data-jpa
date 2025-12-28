@@ -908,3 +908,8 @@ Lazy Initialize Error
 - is necessary to use @Transactional to provides a entire context to Hibernate
 -----------------------------
 Transactional Proxy Mode
+- if I use @Transactional in other method, the context doesn't work
+- use injection with bootstrap new service
+- the problem is solved, I think this is a proxy mode, use a spring bean to handle the transactional logic
+-----------------------------
+Adding Version Property

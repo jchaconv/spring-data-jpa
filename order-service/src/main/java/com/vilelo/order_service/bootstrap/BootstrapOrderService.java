@@ -3,26 +3,15 @@ package com.vilelo.order_service.bootstrap;
 import com.vilelo.order_service.domain.OrderHeader;
 import com.vilelo.order_service.repositories.OrderHeaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Component
-public class Bootstrap implements CommandLineRunner {
+@Service
+public class BootstrapOrderService {
 
     @Autowired
     OrderHeaderRepository orderHeaderRepository;
 
-    @Autowired
-    BootstrapOrderService bootstrapOrderService;
-
-    @Override
-    public void run(String... args) throws Exception {
-        //readOrderData();
-        bootstrapOrderService.readOrderData();
-    }
-
-
-    /*
     @Transactional
     public void readOrderData() {
         OrderHeader orderHeader = orderHeaderRepository.findById(5L).get();
@@ -36,6 +25,5 @@ public class Bootstrap implements CommandLineRunner {
 
         });
     }
-    */
 
 }
