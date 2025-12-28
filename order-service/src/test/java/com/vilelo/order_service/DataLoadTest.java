@@ -39,6 +39,20 @@ public class DataLoadTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Test
+    void testDBLock() {
+        Long id = 55L;
+
+        OrderHeader orderHeader = orderHeaderRepository.findById(id).get();
+
+        Address billTo = new Address();
+        billTo.setAddress("Bill me");
+        orderHeader.setBillToAddress(billTo);
+        orderHeaderRepository.saveAndFlush(orderHeader);
+
+        System.out.println("I updated the order");
+    }
+
     @Disabled
     @Test
     void NPlusOneProblem() {
@@ -72,7 +86,7 @@ public class DataLoadTest {
         List<Product> products = loadProducts();
         Customer customer = loadCustomers();
 
-        int ordersToCreate = 100;
+        int ordersToCreate = 20000;
 
         for (int i = 0; i < ordersToCreate; i++){
             System.out.println("Creating order #: " + i);

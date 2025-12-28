@@ -881,5 +881,30 @@ Hibernate N+1 Problem
 - after changes there are only three queries
 - tests disabled to don't comment schema.sql
 
+********************************************
+Section 18: Database Transactions & Locking
+********************************************
 
+branch: section18-database-transactions-locking
 
+Important Terms:
+- Transaction: Unit of work, one or more sql operations, typically DML
+- Commit: indicates end of transaction, tells db to make changes permanent
+- Rollback: revert changes of the transaction
+- Save Point: programmatic point you can set, which allows you to rollback
+---------------------------
+Database Locking Demo
+- if you run this select * from order_header where id = 1 for update;
+  on mysql workbench there is a lock running, you run the test but it's waiting
+  until you make a commit ---testDBLock()
+-----------------------------
+Spring Data JPA Transactions
+- @Transactional of springframework
+- Bootstrap class, run the application with spring context (local env)
+-----------------------------
+Lazy Initialize Error
+- edit Bootstrap class
+- the query of categories is outside the context of a Hibernate session
+- is necessary to use @Transactional to provides a entire context to Hibernate
+-----------------------------
+Transactional Proxy Mode
