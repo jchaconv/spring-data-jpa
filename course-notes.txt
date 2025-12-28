@@ -868,9 +868,18 @@ Lazy vs Eager Fetch
 - In OrderHeader add fetch = FetchType.LAZY to not get this data in the query
   We only get this customer when we ask for it explicitly
 - see queries performed in tests logs  --> saved in evidence-lazy-query-customer.sql (ctrl+alt+L to format)
-
-
-
+-----------------------
+Hibernate N+1 Problem
+- orderLines are LAZY, every time I get orderHeader I don't receive the lines (this is ok)
+  the problem is when I use the getLines() and hibernate performs a query every single time.
+  the test proves this problem (it's like a loop to call getLines())
+- multiple select statements to perfom the NPlusOneProblem test
+- add fetch = FetchType.EAGER in orderLines (I think this is optional because EAGER is the default value)
+  and @Fetch(FetchMode.SUBSELECT)
+- in orderApproval delete the mappedBy and add @Fetch(FetchMode.SELECT)
+- if you have thousands of records the performance is affected by this problem
+- after changes there are only three queries
+- tests disabled to don't comment schema.sql
 
 
 

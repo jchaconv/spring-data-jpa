@@ -14,8 +14,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @ActiveProfiles("local")
 @DataJpaTest
@@ -37,17 +39,33 @@ public class DataLoadTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Disabled
+    @Test
+    void NPlusOneProblem() {
+
+        Customer customer = customerRepository.findCustomerByCustomerNameIgnoreCase(TEST_CUSTOMER).get();
+
+        IntSummaryStatistics totalOrdered = orderHeaderRepository.findAllByCustomer(customer).stream()
+                .flatMap(orderHeader -> orderHeader.getOrderLines().stream())
+                .collect(Collectors.summarizingInt(ol -> ol.getQuantityOrdered()));
+
+        System.out.println("total ordered: "  + totalOrdered.getSum());
+
+    }
+
+    @Disabled
     @Test
     void lazyVsEager() {
         OrderHeader orderHeader = orderHeaderRepository.findById(5L).get();
 
         System.out.println("======= Order Id is: " + orderHeader.getId());
 
-        //System.out.println("Customer name is: " + orderHeader.getCustomer().getCustomerName());
+        //Comment this line to see the behavior in logs
+        System.out.println("Customer name is: " + orderHeader.getCustomer().getCustomerName());
 
     }
 
-    //@Disabled
+    @Disabled
     @Rollback(value = false)
     @Test
     void testDataLoader() {

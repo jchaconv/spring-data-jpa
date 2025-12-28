@@ -1,4 +1,4 @@
-/*SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 drop table if exists product_category;
 drop table if exists order_line;
@@ -165,5 +165,3 @@ alter table order_approval
 alter table order_approval
     add constraint order_hdr_fk
         foreign key (order_header_id) references order_header (id);
-
- */
