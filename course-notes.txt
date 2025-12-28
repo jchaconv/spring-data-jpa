@@ -844,3 +844,8 @@ Orphan Removal: has no dependency of any table
 - See this test deleteOrderApproval_Cascade_Success() by default I don't see the deletion of the order_approval record
 - add this in OrderHeader: orphanRemoval = true
 - it is an unusual feature, but now I see the deletion of the record.
+---------------------------
+one2one bi-directional
+- bi-directional because each table has the id to reference the other table
+- alter order_approval to have order_header_id and a constraint
+- test ok, I added a no validation at the beginning of the schema.sql

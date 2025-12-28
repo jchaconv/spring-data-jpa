@@ -1,11 +1,13 @@
+SET FOREIGN_KEY_CHECKS = 0;
 
-drop table if exists order_line cascade;
-drop table if exists order_header cascade;
-drop table if exists product_category cascade;
-drop table if exists category cascade;
-drop table if exists product cascade;
-drop table if exists customer cascade;
-drop table if exists order_approval cascade;
+drop table if exists product_category;
+drop table if exists order_line;
+drop table if exists order_approval;
+drop table if exists order_header;
+drop table if exists product;
+drop table if exists category;
+drop table if exists customer;
+
 
 create table order_header
 (
@@ -155,3 +157,11 @@ alter table order_header
 alter table order_header
     add constraint order_approval_fk
         foreign key (order_approval_id) references order_approval (id);
+
+-- one2one bidirectional
+alter table order_approval
+    add column order_header_id bigint;
+
+alter table order_approval
+    add constraint order_hdr_fk
+        foreign key (order_header_id) references order_header (id);
