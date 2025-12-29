@@ -1,4 +1,4 @@
-/*SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 drop table if exists product_category;
 drop table if exists order_line;
@@ -174,4 +174,13 @@ alter table order_approval
 
 alter table order_line
     add column version integer;
-*/
+
+update orderservice.order_header set version = 0 where version is NULL;
+update orderservice.order_line set version = 0 where version is NULL;
+
+alter table product
+    add column quantity_on_hand integer default 0;
+
+update product
+    set product.quantity_on_hand = 10;
+

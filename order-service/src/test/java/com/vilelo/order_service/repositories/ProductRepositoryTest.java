@@ -43,4 +43,20 @@ class ProductRepositoryTest {
         assertNotNull(fetchedProduct.get().getLastModifiedDate());
     }
 
+    @Test
+    void addAndUpdateProduct_Success() {
+        Product product = new Product();
+        product.setDescription("New Product");
+        product.setProductStatus(ProductStatus.NEW);
+
+        Product savedProduct = productRepository.saveAndFlush(product);
+
+        savedProduct.setQuantityOnHand(25);
+
+        Product savedProduct2 = productRepository.saveAndFlush(savedProduct);
+
+        System.out.println("==== savedProduct2.getId():" + savedProduct2.getId());
+
+    }
+
 }

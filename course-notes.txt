@@ -930,6 +930,10 @@ Version Property Cannot Be Null
 
 UPDATE orderservice.order_header oh SET oh.version = 0 WHERE oh.version is NULL;
 UPDATE orderservice.order_line SET version = 0 WHERE version is NULL;
+
+updated on schema.sql
 -----------------------------
--
+Assignment - Add Quantity On Hand to Product
+- alter schema.sql
+- write test addAndUpdateProduct_Success() --- ok
 
