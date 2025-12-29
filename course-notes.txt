@@ -1007,3 +1007,17 @@ Single Table
     - there is only Vehicle table created with the properties of Car and Truck
 ---------------------
 Joined Table
+- instrument class
+    - piano
+    - guitar
+        - electric guitar
+- I expected that electric guitar has the properties of guitar and instrument
+    - but only has id and numberOfPickups
+    - where is guitar property?
+- let's create some data to see on tables
+- create ElectricGuitarRepository and Bootstrap
+- electricguitar only has number_of_pickups and the same id as guitar and instrument
+- so, this is a join feature because I don't need to persist Guitar, just with ElectricGuitar
+  the record of Guitar was saved.
+
+* if you have strong object model this can be helpful
