@@ -1021,3 +1021,20 @@ Joined Table
   the record of Guitar was saved.
 
 * if you have strong object model this can be helpful
+
+***********************************
+Section 21: Legacy database mapping
+***********************************
+
+branch: section21-legacy-database-mapping
+
+Legacy db: Older, not written for use with JPA
+jpa convention: firstName = FIRST_NAME
+
+- wordpress db example
+- create sdjpa-legacy-db-mapping
+
+
+
+
+
