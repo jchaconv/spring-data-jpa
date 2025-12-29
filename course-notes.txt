@@ -1043,12 +1043,17 @@ jpa convention: firstName = FIRST_NAME
 - Validations: add validation dependency
     - look at User class and UserMeta. Size is from jakarta. New is @URL to validate format
 - @Column properties: see User and Usermeta
+    * With the @Column annotation, if you use the length attribute will data be validated before persistence?
+      No, this is only used for schema generation and validation.
     - managed by Hibernate
     - @Column(name = "user_login", length = 60)
     - run the app
 - Database indexes
     - if it's necessary to generate a schema with hibernate
-    - use idexes @Index and map the keys of user (check user wp_script)
+    - use indexes @Index and map the keys of user (check user wp_script)
 - Refactor for Bi-Directional Association
-
+    - map the relation wp_usermeta -> wp_user
+- Assignment - mapping Comment and CommentMeta
+- This project is useful to practice some mapping and see how it handles inserts
+  from unit tests
 

@@ -4,21 +4,22 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "wp_usermeta")
-public class UserMeta {
-
+@Table(name = "wp_commentmeta", indexes = {
+        @Index(name = "comment_id", columnList = "comment_id"),
+        @Index(name = "meta_key", columnList = "meta_key")
+})
+public class CommentMeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "umeta_id")
+    @Column(name = "meta_id")
     private Long id;
 
     @ManyToOne
-    private User user;
-
-    //private Long userId;
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 
     @Size(max = 255)
-    @Column(columnDefinition = "longtext")
+    @Column(name = "meta_key")
     private String metaKey;
 
     @Lob
@@ -32,12 +33,12 @@ public class UserMeta {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Comment getComment() {
+        return comment;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 
     public String getMetaKey() {
@@ -55,6 +56,4 @@ public class UserMeta {
     public void setMetaValue(String metaValue) {
         this.metaValue = metaValue;
     }
-
-
 }
