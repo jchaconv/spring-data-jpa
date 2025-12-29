@@ -1033,8 +1033,14 @@ jpa convention: firstName = FIRST_NAME
 
 - wordpress db example
 - create sdjpa-legacy-db-mapping
-
-
+- map User entity, nothing new, run app to validate mapping is correctly
+- LOB columns: telling hibernate @Lob field is a large object, see UserMeta
+    - string in java, longtext in db
+- basic annotation
+    - you can use this: @Basic(optional = false)
+    - instead of this: @Column(name = "display_name", nullable = false)
+    - use when name matches. i used in displayName of User
+- Validations: add validation dependency
 
 
 
