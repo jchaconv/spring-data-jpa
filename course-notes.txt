@@ -947,3 +947,27 @@ Pessimistic Locking
     - no differences, I don't see the SELECT for update statement
 - add @Transactional to service method, but I still don't see the select in console
 - Is it a console config?
+
+*********************************
+Section 19: Java Bean Validation
+*********************************
+
+branch: section19-java-bean-validation
+
+Validations should be at these three levels:
+- user input validation
+- api validation
+- persistence validation (my example is in this level)
+    - such as a pre persistence validation
+
+
+@Null, NotNull, AssertTrue, AssertFalse, Min, Max, Past, etc
+- order-service application
+- add validation dependency
+- see saveOrder_ValidationErrors() OrderRepoTest
+- Customer, add @Length(max) to customerName and phone
+    - the error now is more specific than before
+    - before: org.springframework.dao.DataIntegrityViolationException: could not execute statement [Data truncation: Data too long for column 'customer_name' at row 1]
+    - after: ConstraintViolationImpl{interpolatedMessage='length must be between 0 and 50', propertyPath=customerName
+- when is a property inside an object such as City of Address, you need to add @Valid to the object
+- I get the list of constraintsViolations

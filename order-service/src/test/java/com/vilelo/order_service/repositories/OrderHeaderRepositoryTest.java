@@ -2,6 +2,7 @@ package com.vilelo.order_service.repositories;
 
 import com.vilelo.order_service.domain.*;
 import com.vilelo.order_service.domain.enums.ProductStatus;
+import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,6 @@ class OrderHeaderRepositoryTest {
 
     @Autowired
     CustomerRepository customerRepository;
-
-    @Autowired
-    OrderApprovalRepository orderApprovalRepository;
 
     Product product;
 
@@ -80,7 +78,9 @@ class OrderHeaderRepositoryTest {
     @Test
     void saveOrder_Success() {
         OrderHeader orderHeader = new OrderHeader();
-        orderHeader.setCustomer(customerRepository.save(new Customer()));
+        Customer customer = new Customer();
+        customer.setCustomerName("New Customer");
+        orderHeader.setCustomer(customerRepository.save(customer));
         OrderHeader savedOrder = orderHeaderRepository.save(orderHeader);
 
         assertNotNull(savedOrder);
@@ -149,6 +149,31 @@ class OrderHeaderRepositoryTest {
         assertThrows(NoSuchElementException.class, () -> {
             orderHeaderRepository.findById(savedOrder.getId()).orElseThrow();
         });
+
+    }
+
+    @Test
+    void saveCustomer_ValidationErrors() {
+
+        Address address = new Address();
+        address.setAddress("New Address 0123445678890 0123445678890 0123445678890");
+        address.setCity("New City 0123445678890 0123445678890 0123445678890");
+        address.setState("New State 0123445678890 0123445678890 0123445678890");
+        address.setZipCode("12345 0123445678890 0123445678890 0123445678890");
+
+        Customer customer = new Customer();
+        customer.setCustomerName("New Customer 012456778890012456778890012456778890012456778890012456778890012456778890");
+        customer.setPhone("123456789012345678901234567890");
+        customer.setEmail("juliochacon.com");
+
+        customer.setAddress(address);
+
+        ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> {
+            customerRepository.save(customer);
+        });
+
+        System.out.println(exception.getMessage());
+        assertNotNull(exception.getMessage());
 
     }
 }

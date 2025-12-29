@@ -122,7 +122,7 @@ create table customer
     state     varchar(30),
     zip_code  varchar(30),
     phone              varchar(20),
-    email              varchar(255),
+    email              varchar(30),
     created_date       timestamp,
     last_modified_date timestamp
 );

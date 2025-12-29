@@ -1,15 +1,23 @@
 package com.vilelo.order_service.domain;
 
 import jakarta.persistence.Embeddable;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.Objects;
 
 @Embeddable
 public class Address {
 
+    @Length(max = 30)
     private String address;
+
+    @Length(max = 30)
     private String city;
+
+    @Length(max = 30)
     private String state;
+
+    @Length(max = 30)
     private String zipCode;
 
     public String getAddress() {
