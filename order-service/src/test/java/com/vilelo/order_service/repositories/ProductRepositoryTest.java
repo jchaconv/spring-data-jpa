@@ -2,10 +2,12 @@ package com.vilelo.order_service.repositories;
 
 import com.vilelo.order_service.domain.Product;
 import com.vilelo.order_service.domain.enums.ProductStatus;
+import com.vilelo.order_service.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
@@ -15,10 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
+@ComponentScan(basePackageClasses = {ProductService.class})
 class ProductRepositoryTest {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    ProductService productService;
 
     @Test
     void getCategory_Success() {
@@ -54,6 +60,22 @@ class ProductRepositoryTest {
         savedProduct.setQuantityOnHand(25);
 
         Product savedProduct2 = productRepository.saveAndFlush(savedProduct);
+
+        System.out.println("==== savedProduct2.getId():" + savedProduct2.getId());
+
+    }
+
+    @Test
+    void addAndUpdateProduct_FromService_Success() {
+        Product product = new Product();
+        product.setDescription("New Product");
+        product.setProductStatus(ProductStatus.NEW);
+
+        //Product savedProduct = productRepository.saveAndFlush(product);
+        //savedProduct.setQuantityOnHand(25);
+
+        Product savedProduct = productService.saveProduct(product);
+        Product savedProduct2 = productService.updateQuantityOnHand(savedProduct.getId(), 25);
 
         System.out.println("==== savedProduct2.getId():" + savedProduct2.getId());
 

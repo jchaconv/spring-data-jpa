@@ -936,4 +936,14 @@ updated on schema.sql
 Assignment - Add Quantity On Hand to Product
 - alter schema.sql
 - write test addAndUpdateProduct_Success() --- ok
-
+-----------------------------
+Pessimistic Locking
+- create and implement ProductService
+- addAndUpdateProduct_FromService_Success() on repo test
+    - it's necessary the ComponentScan for a Service class because DataJpaTest has it's limitations
+- in repo override findById and add @Lock PESSIMISTIC_WRITE
+    - this tells hiberante "do the select for update"
+- see evidence_pessimistic_lock.sql
+    - no differences, I don't see the SELECT for update statement
+- add @Transactional to service method, but I still don't see the select in console
+- Is it a console config?
