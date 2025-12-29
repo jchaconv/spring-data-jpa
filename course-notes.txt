@@ -1046,8 +1046,9 @@ jpa convention: firstName = FIRST_NAME
     - managed by Hibernate
     - @Column(name = "user_login", length = 60)
     - run the app
--
-
-
+- Database indexes
+    - if it's necessary to generate a schema with hibernate
+    - use idexes @Index and map the keys of user (check user wp_script)
+- Refactor for Bi-Directional Association
 
 
