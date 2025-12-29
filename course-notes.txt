@@ -1000,4 +1000,10 @@ Mapped Super Class
   - there is a new table created "hibernate_sequences"
     - it is used by Hibernate to manage how id's of Dog and Dolphin table are created
 ---------------------
-
+Single Table
+- add this to Vehicle: @DiscriminatorColumn(name = "vehicle_type")
+- add @DiscriminatorValue("car") to the classes that are extended from Vehicle
+- after run the app:
+    - there is only Vehicle table created with the properties of Car and Truck
+---------------------
+Joined Table
