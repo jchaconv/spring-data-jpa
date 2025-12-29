@@ -1041,6 +1041,13 @@ jpa convention: firstName = FIRST_NAME
     - instead of this: @Column(name = "display_name", nullable = false)
     - use when name matches. i used in displayName of User
 - Validations: add validation dependency
+    - look at User class and UserMeta. Size is from jakarta. New is @URL to validate format
+- @Column properties: see User and Usermeta
+    - managed by Hibernate
+    - @Column(name = "user_login", length = 60)
+    - run the app
+-
+
 
 
 
