@@ -923,3 +923,13 @@ Optimistic Locking Demo
 - you need to use the new object returned by save() operation
 - I think this error was thrown by the use of @Version. This new object is returned the proper version.
 - you can't delete the first savedCustomer because is staled data
+-----------------------------
+Version Property Cannot Be Null
+- add version to order_header amd order_line
+- use a script on mysql to set 0 the version
+
+UPDATE orderservice.order_header oh SET oh.version = 0 WHERE oh.version is NULL;
+UPDATE orderservice.order_line SET version = 0 WHERE version is NULL;
+-----------------------------
+-
+
