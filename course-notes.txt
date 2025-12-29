@@ -971,3 +971,19 @@ Validations should be at these three levels:
     - after: ConstraintViolationImpl{interpolatedMessage='length must be between 0 and 50', propertyPath=customerName
 - when is a property inside an object such as City of Address, you need to add @Valid to the object
 - I get the list of constraintsViolations
+
+*********************************
+Section 20: JPA Inheritance
+*********************************
+
+branch: section20-jpa-inheritance
+- create sdjpa-inheritance project. JPA, H2 and web
+
+Mapped Super Class
+- BaseEntity with the super class annotation
+- h2 console enabled true, run app, copy jdbc random id on console
+    - jdbc-url: jdbc:h2:mem:71f2370a-f12b-47da-82fc-adcc0390b338
+    - user: sa
+    - password: let empty this field
+- I see the OrderHeader table created with the property id of BaseEntity.
+  However, there is no BaseEntity table, results correct.
