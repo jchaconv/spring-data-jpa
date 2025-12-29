@@ -917,3 +917,9 @@ Adding Version Property
 - edit Customer and use @Version of jakarta
 - version is populated automatically with 0 by Hibernate if I don't specified
 -----------------------------
+Optimistic Locking Demo
+- demo with version property in different objects
+- once you save the customer the first time, it will be invalid if you save a second o third time
+- you need to use the new object returned by save() operation
+- I think this error was thrown by the use of @Version. This new object is returned the proper version.
+- you can't delete the first savedCustomer because is staled data
