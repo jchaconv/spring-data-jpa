@@ -978,7 +978,7 @@ Section 20: JPA Inheritance
 
 branch: section20-jpa-inheritance
 - create sdjpa-inheritance project. JPA, H2 and web
-
+--------------------
 Mapped Super Class
 - BaseEntity with the super class annotation
 - h2 console enabled true, run app, copy jdbc random id on console
@@ -987,3 +987,17 @@ Mapped Super Class
     - password: let empty this field
 - I see the OrderHeader table created with the property id of BaseEntity.
   However, there is no BaseEntity table, results correct.
+  --------------------
+  Table Per Class
+
+  - add this to Mammal:
+    @Entity
+    @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
+  - The id needs to be generated as TABLE
+  - with this config there is no Mammal table created(it's ok)
+  - there are Dog and Dolphin tables (ok)
+  - there is a new table created "hibernate_sequences"
+    - it is used by Hibernate to manage how id's of Dog and Dolphin table are created
+---------------------
+
