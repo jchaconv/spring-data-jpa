@@ -1077,7 +1077,14 @@ branch: section22-hibernate-interceptors
     - On an entity method
     - On an Entity Listener Class
 
-
 - create sdjpa-credit-card project
 - run mysql-setup.sql
 - save credit card test it's ok
+-------------------------------------
+Encryption Service
+- create and impl EncryptionService, very simple logic with Base64
+    - in theory this is not encryption, it's just encoding
+- i need to compare the value returned from db against the cc encrypted
+- create interceptor and InterceptorRegistration then see test logs of interceptor methods
+- create the EncryptedString annotation and add to ccnumber
+- test not ok, i really don't know what is the utility of this
