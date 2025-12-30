@@ -1057,3 +1057,27 @@ jpa convention: firstName = FIRST_NAME
 - This project is useful to practice some mapping and see how it handles inserts
   from unit tests
 
+***********************************
+Section 22: Hibernate Interceptors
+***********************************
+
+branch: section22-hibernate-interceptors
+
+- Interceptors
+    - stateless
+    - shared between requests
+    - security, auditing or alter data
+    - Interceptor and EmptyInterceptor
+-  Listeners
+    - EventType
+    - Entity listeners have no-arg constructor
+    - methods must return void
+    - not use EntityManager
+- Callbacks
+    - On an entity method
+    - On an Entity Listener Class
+
+
+- create sdjpa-credit-card project
+- run mysql-setup.sql
+- save credit card test it's ok
