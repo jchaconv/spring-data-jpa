@@ -1096,4 +1096,6 @@ Section 23: Hibernate Listeners
 branch: section23-hibernate-listeners
 - disable interceptor by commented the @Component and other code, see InterceptorRegistration
 - create hibernate listeners
-- register hibernate listeners
+- register hibernate listeners, create ListenerRegistration
+- Implement Hibernate Encryption Listeners
+- for some reason test fail because encoding it's different
