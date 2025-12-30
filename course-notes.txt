@@ -1110,4 +1110,6 @@ branch: section24-jpa-callbacks
 - JPA Callback Listener: create new callback class CCJPACallback, add some annotations, add in CC
     - @EntityListeners(CreditCardJPACallback.class)
     - both methods were called correctly ... test with same method: saveAndStoreCreditCard_Encryption
--
+- Spring Context Helper: create helper class on config package
+- Implement Callback Encryption: edit CCJPACallback ... test not ok
+- JPA Converters: comment lines con CreditCard, create Converter class, tests ok with test() method.
