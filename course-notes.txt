@@ -1088,3 +1088,12 @@ Encryption Service
 - create interceptor and InterceptorRegistration then see test logs of interceptor methods
 - create the EncryptedString annotation and add to ccnumber
 - test not ok, i really don't know what is the utility of this
+
+********************************
+Section 23: Hibernate Listeners
+********************************
+
+branch: section23-hibernate-listeners
+- disable interceptor by commented the @Component and other code, see InterceptorRegistration
+- create hibernate listeners
+- register hibernate listeners
