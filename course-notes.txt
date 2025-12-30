@@ -1,6 +1,7 @@
 
 
 start: 09/12/2025
+end: 30/12/2025
 
 *******************************************
 Section 2: Introduction to Spring Data JPA
@@ -1140,3 +1141,17 @@ branch: section25-multiple-datasources
 - hibernate transient properties ---- adding @Transient in CreditCard, those properties not persist on db
 - alter credit_card_id to bigint
 - write tests, use @Transactional on saveCreditCard of ServiceImpl
+
+**************************************
+Section 26: Intro to Spring Data REST
+**************************************
+section repo: https://github.com/springframeworkguru/sdjpa-spring-data-rest/tree/set-entity-path
+
+branch: section26-spring-data-rest
+
+- to expose entites as rest services without using controller
+- config new project
+- add data-rest dependency
+- add properties of data.rest
+- @RepositoryRestResource(path="beer")
+
