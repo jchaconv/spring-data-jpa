@@ -1099,3 +1099,9 @@ branch: section23-hibernate-listeners
 - register hibernate listeners, create ListenerRegistration
 - Implement Hibernate Encryption Listeners
 - for some reason test fail because encoding it's different
+
+**************************
+Section 24: JPA Callbacks
+**************************
+branch: section24-jpa-callbacks
+- disable listeners
