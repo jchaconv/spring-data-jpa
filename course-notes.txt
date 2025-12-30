@@ -1113,3 +1113,30 @@ branch: section24-jpa-callbacks
 - Spring Context Helper: create helper class on config package
 - Implement Callback Encryption: edit CCJPACallback ... test not ok
 - JPA Converters: comment lines con CreditCard, create Converter class, tests ok with test() method.
+
+
+*********************************
+Section 25: Multiple DataSources
+**********************************
+section repo: https://github.com/springframeworkguru/sdjpa-multi-db/tree/get-cc-by-id
+
+branch: section25-multiple-datasources
+- multi-db project
+- script setup
+- entities with lombok
+- add db connections on properties file
+- create DatabaseConfiguration files
+    - one is marked as Primary, create datasources(methods)
+    - create entitymanagers on db configs classes
+    - create transaction managers
+    - ignore the builder error
+- create repository
+- migration scripts (put on schema.sql)
+- flyway configuration class
+- start application see tables created
+- Hikari Database Pooling Properties, setup different pools for each db connection
+- configure hibernate schema validation in dbconfiguration classes, add property "validate"
+- configure hibernate naming conventions, also by adding property "strategy"
+- hibernate transient properties ---- adding @Transient in CreditCard, those properties not persist on db
+- alter credit_card_id to bigint
+- write tests, use @Transactional on saveCreditCard of ServiceImpl
