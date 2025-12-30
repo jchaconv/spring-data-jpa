@@ -1107,4 +1107,7 @@ branch: section24-jpa-callbacks
 - disable listeners
 - see Redhat docs about Entity Listeners and Callback Methods
 - Use @PrePersist on new method in CreditCard ... just with this configuration(very simple) the method was called
+- JPA Callback Listener: create new callback class CCJPACallback, add some annotations, add in CC
+    - @EntityListeners(CreditCardJPACallback.class)
+    - both methods were called correctly ... test with same method: saveAndStoreCreditCard_Encryption
 -
